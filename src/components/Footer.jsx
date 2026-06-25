@@ -43,10 +43,15 @@ export default function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-10 mb-14">
           {/* Brand col */}
           <div className="col-span-2 md:col-span-1">
-            <div className="text-xl mb-3">
-              <span className="font-extrabold text-white">MM</span>
-              <span className="font-normal text-white">stack</span>
-            </div>
+            <a href="#" aria-label="MMstack — retour en haut" className="inline-flex items-center gap-2 mb-3">
+              <img
+                src="/logo-icon-light.png"
+                alt="Logo MMstack — cygne origami"
+                width="461" height="331"
+                className="h-7 w-auto object-contain"
+              />
+              <span className="text-xl font-normal text-white">stack</span>
+            </a>
             <p className="text-[#8A8A8A] text-sm leading-relaxed mb-5">
               Digital solutions from Cameroon to the world.
             </p>

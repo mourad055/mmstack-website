@@ -29,9 +29,14 @@ export default function Navbar({ dark, setDark }) {
     }`}>
       <div className="container-xl mx-auto px-6 md:px-12 lg:px-20 flex items-center justify-between h-16">
         {/* Logo */}
-        <a href="#" className="text-xl">
-          <span className="font-extrabold text-[#0A0A0A] dark:text-white">MM</span>
-          <span className="font-normal text-[#0A0A0A] dark:text-white">stack</span>
+        <a href="#" aria-label="MMstack — retour en haut" className="flex items-center gap-2">
+          <img
+            src={dark ? '/logo-icon-light.png' : '/logo-icon-dark.png'}
+            alt="Logo MMstack — cygne origami"
+            width="461" height="331"
+            className="h-8 w-auto object-contain"
+          />
+          <span className="text-xl font-normal text-[#0A0A0A] dark:text-white">stack</span>
         </a>
 
         {/* Desktop nav */}

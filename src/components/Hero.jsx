@@ -39,6 +39,20 @@ export default function Hero() {
         <rect width="100%" height="100%" fill="url(#hero-dots)" />
       </svg>
 
+      {/* Watermark cygne — décoratif, très discret, ancré dans le coin bas-gauche, desktop uniquement */}
+      <img
+        src="/logo-icon-slate.png"
+        alt=""
+        aria-hidden="true"
+        className="pointer-events-none select-none absolute -left-24 -bottom-16 hidden lg:block h-[58%] w-auto opacity-[0.035] dark:hidden"
+      />
+      <img
+        src="/logo-icon-light.png"
+        alt=""
+        aria-hidden="true"
+        className="pointer-events-none select-none absolute -left-24 -bottom-16 hidden lg:dark:block h-[58%] w-auto opacity-[0.025]"
+      />
+
       <div className="container-xl mx-auto px-6 md:px-12 lg:px-20 pt-32 pb-20 lg:pt-36 lg:pb-28">
         <motion.div
           variants={container}
