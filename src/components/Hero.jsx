@@ -1,141 +1,115 @@
-import { motion, useReducedMotion } from 'framer-motion'
-import { ArrowRight, MapPin } from 'lucide-react'
+import { useEffect, useState } from 'react'
+import { motion } from 'framer-motion'
+import { ChevronDown } from 'lucide-react'
 
-// Unsplash — développeurs africains au travail (vérifié 200)
-const PHOTO = 'https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1100&q=80'
+const stats = [
+  { n: '10+',  label: 'Projets livrés' },
+  { n: '2',    label: 'Co-fondateurs' },
+  { n: '100%', label: 'Made in Cameroon' },
+]
 
-const proof = ['10+ projets livrés', 'Réponse sous 24h', 'Ambam, Cameroun']
+const fade = (delay, y = 30) => ({
+  initial: { opacity: 0, y },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.8, delay, ease: [0.16, 1, 0.3, 1] },
+})
 
 export default function Hero() {
-  const reduce = useReducedMotion()
+  const [isMobile, setIsMobile] = useState(false)
 
-  // Une seule chorégraphie d'entrée. Repli net si l'utilisateur a demandé moins de mouvement.
-  const container = {
-    hidden: {},
-    show: { transition: { staggerChildren: reduce ? 0 : 0.09, delayChildren: 0.05 } },
-  }
-  const rise = {
-    hidden: reduce ? { opacity: 1 } : { opacity: 0, y: 24 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.25, 1, 0.5, 1] } },
-  }
-  const reveal = {
-    hidden: reduce ? { opacity: 1 } : { opacity: 0, clipPath: 'inset(0 0 100% 0)' },
-    show: {
-      opacity: 1,
-      clipPath: 'inset(0 0 0% 0)',
-      transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] },
-    },
-  }
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
 
   return (
-    <section className="relative overflow-x-clip bg-white dark:bg-[#0A0A0A]">
-      {/* Filet d'atelier : trame de points très discrète en haut à droite */}
-      <svg aria-hidden className="pointer-events-none absolute -top-10 right-0 h-72 w-72 opacity-[0.05] dark:opacity-[0.08]" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <pattern id="hero-dots" width="22" height="22" patternUnits="userSpaceOnUse">
-            <circle cx="1.5" cy="1.5" r="1.5" fill="currentColor" className="text-[#0A0A0A] dark:text-white" />
-          </pattern>
-        </defs>
-        <rect width="100%" height="100%" fill="url(#hero-dots)" />
-      </svg>
+    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-[#0A0A0A]">
 
-      {/* Watermark cygne — décoratif, très discret, ancré dans le coin bas-gauche, desktop uniquement */}
-      <img
-        src="/logo-icon-slate.png"
-        alt=""
-        aria-hidden="true"
-        className="pointer-events-none select-none absolute -left-24 -bottom-16 hidden lg:block h-[58%] w-auto opacity-[0.035] dark:hidden"
-      />
-      <img
-        src="/logo-icon-light.png"
-        alt=""
-        aria-hidden="true"
-        className="pointer-events-none select-none absolute -left-24 -bottom-16 hidden lg:dark:block h-[58%] w-auto opacity-[0.025]"
-      />
+      {/* Background vidéo — desktop uniquement */}
+      {!isMobile ? (
+        <video
+          className="absolute inset-0 w-full h-full object-cover"
+          autoPlay muted loop playsInline
+          preload="metadata"
+          poster="/hero-poster.jpg"
+        >
+          <source src="/hero-bg.webm" type="video/webm" />
+          <source src="/hero-bg.mp4" type="video/mp4" />
+        </video>
+      ) : (
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: 'url(/hero-poster.jpg)' }}
+        />
+      )}
 
-      <div className="container-xl mx-auto px-6 md:px-12 lg:px-20 pt-32 pb-20 lg:pt-36 lg:pb-28">
+      {/* Overlays empilés */}
+      <div className="absolute inset-0 bg-black/55" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/80" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/20 to-transparent" />
+
+      {/* Contenu */}
+      <div className="relative z-10 flex flex-col items-center justify-center text-center px-6 max-w-5xl mx-auto w-full">
+
+        {/* Badge */}
+        <motion.div {...fade(0.2, 20)}
+          className="mb-8 inline-flex items-center rounded-full border border-white/20 bg-white/5 backdrop-blur-sm px-4 py-1.5 text-xs text-white/70 tracking-[0.2em] uppercase">
+          🇨🇲 Ambam · Cameroon · Since 2025
+        </motion.div>
+
+        {/* Headline */}
+        <motion.h1 {...fade(0.4, 40)}
+          className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-white leading-[1.0] tracking-tight">
+          We Build{' '}
+          <span className="italic font-light text-white/60">Digital</span>
+          <br />Solutions{' '}
+          <span style={{ color: '#38BDF8' }}>for Africa.</span>
+        </motion.h1>
+
+        {/* Sous-titre */}
+        <motion.p {...fade(0.7)}
+          className="mt-6 text-lg md:text-xl text-white/55 max-w-lg leading-relaxed">
+          Logiciels sur mesure, sites web et services IT
+          depuis Ambam vers le monde entier.
+        </motion.p>
+
+        {/* CTAs */}
+        <motion.div {...fade(0.9)} className="mt-10 flex flex-wrap items-center justify-center gap-4">
+          <a href="#contact"
+            className="bg-white text-[#0F172A] px-7 py-3.5 rounded-full font-semibold text-sm hover:bg-white/90 hover:scale-105 transition-all duration-200">
+            Démarrer un projet →
+          </a>
+          <a href="#services"
+            className="border border-white/25 bg-white/5 backdrop-blur-sm text-white px-7 py-3.5 rounded-full font-semibold text-sm hover:bg-white/15 hover:border-white/40 transition-all duration-200">
+            Voir nos services
+          </a>
+        </motion.div>
+
+        {/* Stats row */}
+        <motion.div {...fade(1.1, 20)}
+          className="mt-16 pt-8 border-t border-white/10 flex flex-wrap justify-center gap-12">
+          {stats.map((s, i) => (
+            <motion.div key={s.label}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 1.1 + i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+              className="text-center">
+              <div className="text-3xl font-black text-white">{s.n}</div>
+              <div className="text-sm text-white/45 mt-1">{s.label}</div>
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
+
+      {/* Scroll indicator */}
+      <div className="absolute bottom-8 left-0 right-0 flex flex-col items-center gap-2 z-10">
+        <span className="text-white/30 text-xs tracking-widest uppercase">Découvrir</span>
         <motion.div
-          variants={container}
-          initial="hidden"
-          animate="show"
-          className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center">
-
-          {/* Colonne typo */}
-          <div className="lg:col-span-7">
-            {/* Badge lieu */}
-            <motion.div variants={rise}
-              className="inline-flex items-center gap-2 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-full pl-2.5 pr-4 py-1.5 text-sm text-[#6B6B6B] dark:text-[#A0A0A0] mb-7">
-              <span className="relative flex h-2 w-2">
-                {!reduce && <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-clay opacity-60" />}
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-clay" />
-              </span>
-              <MapPin size={13} aria-hidden />
-              <span>Basés à Ambam, Cameroun</span>
-            </motion.div>
-
-            {/* Titre */}
-            <motion.h1 variants={rise}
-              className="text-[clamp(2.1rem,7vw,5.25rem)] font-extrabold leading-[1.05] tracking-[-0.025em] text-[#0A0A0A] dark:text-white text-balance [overflow-wrap:break-word]">
-              Le digital de l'Afrique,
-              <br className="hidden sm:block" />{' '}
-              façonné à{' '}
-              <span className="relative inline-block">
-                Ambam
-                <span aria-hidden className="absolute -bottom-0.5 left-0 h-1.5 w-full rounded-full bg-clay" />
-              </span>
-              .
-            </motion.h1>
-
-            {/* Sous-titre */}
-            <motion.p variants={rise}
-              className="mt-7 max-w-xl text-lg md:text-xl leading-relaxed text-[#0A0A0A]/80 dark:text-[#F5F5F5]/75 text-pretty">
-              MMstack conçoit des logiciels sur mesure, des sites web et des services IT
-              pour les entreprises d'Afrique centrale. Deux fondateurs, une exigence :
-              du travail qui tient.
-            </motion.p>
-
-            {/* CTAs */}
-            <motion.div variants={rise} className="mt-9 flex flex-wrap items-center gap-3">
-              <a href="#contact" className="btn-primary flex items-center gap-2">
-                Démarrer un projet <ArrowRight size={16} aria-hidden />
-              </a>
-              <a href="#services" className="btn-outline">
-                Voir nos services
-              </a>
-            </motion.div>
-
-            {/* Ligne de réassurance */}
-            <motion.ul variants={rise}
-              className="mt-10 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-[#6B6B6B] dark:text-[#A0A0A0]">
-              {proof.map((item, i) => (
-                <li key={item} className="flex items-center gap-4">
-                  {i > 0 && <span aria-hidden className="h-1 w-1 rounded-full bg-[#E5E5E5] dark:bg-[#2A2A2A]" />}
-                  <span className="font-medium text-[#0A0A0A]/70 dark:text-[#F5F5F5]/70">{item}</span>
-                </li>
-              ))}
-            </motion.ul>
-          </div>
-
-          {/* Colonne photo */}
-          <motion.div variants={reveal} className="lg:col-span-5">
-            <div className="relative">
-              <div className="overflow-hidden rounded-2xl border border-[#E5E5E5] dark:border-[#2A2A2A] aspect-[4/5] sm:aspect-[16/11] lg:aspect-[4/5]">
-                <img
-                  src={PHOTO}
-                  alt="L'équipe MMstack en plein développement logiciel, à Ambam."
-                  className="h-full w-full object-cover"
-                  loading="eager"
-                  width="1100"
-                  height="1375"
-                />
-              </div>
-              {/* Légende d'atelier — l'origine, énoncée une fois */}
-              <div className="absolute -bottom-3 left-4 inline-flex items-center gap-2 rounded-lg border border-[#E5E5E5] dark:border-[#2A2A2A] bg-white dark:bg-[#1A1A1A] px-3 py-1.5 text-xs font-semibold text-[#0A0A0A] dark:text-white shadow-[0_6px_20px_rgba(10,10,10,0.08)]">
-                <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-clay" />
-                Atelier MMstack · Sud Cameroun
-              </div>
-            </div>
-          </motion.div>
+          animate={{ y: [0, 6, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}>
+          <ChevronDown size={18} className="text-white/30" />
         </motion.div>
       </div>
     </section>

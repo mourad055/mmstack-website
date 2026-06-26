@@ -16,7 +16,6 @@ export default function App() {
       <Navbar dark={dark} setDark={setDark} />
       <main>
         <Hero />
-        <div className="border-t border-[#E5E5E5] dark:border-[#2A2A2A]" />
         <Services />
         <div className="border-t border-[#E5E5E5] dark:border-[#2A2A2A]" />
         <About />
