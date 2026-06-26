@@ -25,8 +25,8 @@ export default function Navbar({ dark, setDark }) {
         : 'bg-transparent'
     }`}>
       <div className="container-xl mx-auto px-6 md:px-12 lg:px-20 flex items-center justify-between h-16">
-        {/* Logo */}
-        <a href="#" aria-label="MMstack — retour en haut" className="flex items-center gap-2">
+        {/* Logo — extrémité gauche */}
+        <a href="#" aria-label="MMstack — retour en haut" className="flex items-center gap-2 shrink-0">
           <img
             src={dark ? '/logo-icon-light.png' : '/logo-icon-dark.png'}
             alt="Logo MMstack — cygne origami"
@@ -36,26 +36,34 @@ export default function Navbar({ dark, setDark }) {
           <span className="text-xl font-normal text-[#0A0A0A] dark:text-white">MMstack</span>
         </a>
 
-        {/* Desktop nav */}
-        <nav className="hidden lg:flex items-center gap-8">
-          {links.map(l => (
-            <a key={l.href} href={l.href}
-              className="text-sm text-[#8A8A8A] hover:text-[#0A0A0A] dark:hover:text-white transition-colors duration-200">
-              {l.label}
+        {/* Desktop : nav + actions groupés à droite */}
+        <div className="hidden lg:flex items-center gap-10">
+          <nav className="flex items-center gap-8">
+            {links.map(l => (
+              <a key={l.href} href={l.href}
+                className="text-sm text-[#8A8A8A] hover:text-[#0A0A0A] dark:hover:text-white transition-colors duration-200">
+                {l.label}
+              </a>
+            ))}
+          </nav>
+          <div className="flex items-center gap-3">
+            <button onClick={() => setDark(!dark)}
+              className="p-2 rounded-lg hover:bg-[#F5F5F5] dark:hover:bg-[#1A1A1A] transition-colors">
+              {dark ? <Sun size={18} className="text-white" /> : <Moon size={18} className="text-[#0A0A0A]" />}
+            </button>
+            <a href="#contact" className="btn-primary text-sm">
+              Nous contacter
             </a>
-          ))}
-        </nav>
+          </div>
+        </div>
 
-        {/* Right side */}
-        <div className="flex items-center gap-3">
+        {/* Mobile : dark toggle + hamburger */}
+        <div className="flex items-center gap-2 lg:hidden">
           <button onClick={() => setDark(!dark)}
             className="p-2 rounded-lg hover:bg-[#F5F5F5] dark:hover:bg-[#1A1A1A] transition-colors">
             {dark ? <Sun size={18} className="text-white" /> : <Moon size={18} className="text-[#0A0A0A]" />}
           </button>
-          <a href="#contact" className="hidden md:inline-block btn-primary text-sm">
-            Nous contacter
-          </a>
-          <button className="lg:hidden p-2" onClick={() => setOpen(!open)}>
+          <button className="p-2" onClick={() => setOpen(!open)}>
             {open ? <X size={20} /> : <Menu size={20} />}
           </button>
         </div>
