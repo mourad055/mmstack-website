@@ -50,7 +50,7 @@ export default function Footer() {
                 width="461" height="331"
                 className="h-7 w-auto object-contain"
               />
-              <span className="text-xl font-normal text-white">stack</span>
+              <span className="text-xl font-normal text-white">MMstack</span>
             </a>
             <p className="text-[#8A8A8A] text-sm leading-relaxed mb-5">
               Digital solutions from Cameroon to the world.

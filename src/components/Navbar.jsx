@@ -36,7 +36,7 @@ export default function Navbar({ dark, setDark }) {
             width="461" height="331"
             className="h-8 w-auto object-contain"
           />
-          <span className="text-xl font-normal text-[#0A0A0A] dark:text-white">stack</span>
+          <span className="text-xl font-normal text-[#0A0A0A] dark:text-white">MMstack</span>
         </a>
 
         {/* Desktop nav */}
