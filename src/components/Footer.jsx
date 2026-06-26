@@ -13,17 +13,9 @@ const cols = [
     ],
   },
   {
-    title: 'Produits',
-    links: [
-      { label: 'Chambres étudiantes', href: '#chambres' },
-    ],
-  },
-  {
     title: 'Entreprise',
     links: [
       { label: 'À propos', href: '#about' },
-      { label: 'Portfolio', href: '#portfolio' },
-      { label: 'Tarifs', href: '#pricing' },
     ],
   },
   {
