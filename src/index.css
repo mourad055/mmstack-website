@@ -17,6 +17,22 @@
   ::placeholder { @apply text-[#6B6B6B]; }
 }
 
+/* Ken Burns — zoom lent et imperceptible sur la vidéo hero */
+@keyframes ken-burns {
+  0%   { transform: scale(1)    translate(0, 0); }
+  50%  { transform: scale(1.06) translate(-1%, 0.5%); }
+  100% { transform: scale(1)    translate(0, 0); }
+}
+
+.hero-video {
+  animation: ken-burns 24s ease-in-out infinite;
+  transform-origin: center center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-video { animation: none; }
+}
+
 @layer utilities {
   .section-pad { @apply py-24 px-6 md:px-12 lg:px-20; }
   .container-xl { @apply max-w-6xl mx-auto; }

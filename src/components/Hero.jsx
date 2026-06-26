@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { ChevronDown } from 'lucide-react'
 
@@ -15,53 +14,37 @@ const fade = (delay, y = 30) => ({
 })
 
 export default function Hero() {
-  const [isMobile, setIsMobile] = useState(false)
-
-  useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 768)
-    check()
-    window.addEventListener('resize', check)
-    return () => window.removeEventListener('resize', check)
-  }, [])
-
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-[#0A0A0A]">
+    <section className="relative min-h-screen flex flex-col overflow-hidden bg-[#0A0A0A]">
 
-      {/* Background vidéo — desktop uniquement */}
-      {!isMobile ? (
-        <video
-          className="absolute inset-0 w-full h-full object-cover"
-          autoPlay muted loop playsInline
-          preload="metadata"
-          poster="/hero-poster.jpg"
-        >
-          <source src="/hero-bg.webm" type="video/webm" />
-          <source src="/hero-bg.mp4" type="video/mp4" />
-        </video>
-      ) : (
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: 'url(/hero-poster.jpg)' }}
-        />
-      )}
+      {/* Background vidéo — desktop + mobile */}
+      <video
+        className="absolute inset-0 w-full h-full object-cover hero-video"
+        autoPlay muted loop playsInline
+        preload="metadata"
+        poster="/hero-poster.jpg"
+      >
+        <source src="/hero-bg.webm" type="video/webm" />
+        <source src="/hero-bg.mp4" type="video/mp4" />
+      </video>
 
-      {/* Overlays empilés */}
-      <div className="absolute inset-0 bg-black/55" />
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/80" />
-      <div className="absolute inset-0 bg-gradient-to-b from-black/20 to-transparent" />
+      {/* Overlays */}
+      <div className="absolute inset-0 bg-black/60" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/85" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/20 to-transparent" />
 
-      {/* Contenu */}
-      <div className="relative z-10 flex flex-col items-center justify-center text-center px-6 max-w-5xl mx-auto w-full">
+      {/* Contenu — ancré à gauche sur desktop */}
+      <div className="relative z-10 flex flex-col justify-center flex-1 px-6 md:px-12 lg:px-20 pt-32 pb-24 max-w-6xl mx-auto w-full">
 
         {/* Badge */}
         <motion.div {...fade(0.2, 20)}
-          className="mb-8 inline-flex items-center rounded-full border border-white/20 bg-white/5 backdrop-blur-sm px-4 py-1.5 text-xs text-white/70 tracking-[0.2em] uppercase">
+          className="mb-8 inline-flex self-start items-center rounded-full border border-white/20 bg-white/5 backdrop-blur-sm px-4 py-1.5 text-xs text-white/70 tracking-[0.2em] uppercase">
           🇨🇲 Ambam · Cameroon · Since 2025
         </motion.div>
 
         {/* Headline */}
         <motion.h1 {...fade(0.4, 40)}
-          className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-white leading-[1.0] tracking-tight">
+          className="text-5xl md:text-6xl lg:text-7xl xl:text-[5.5rem] font-black text-white leading-[1.05] tracking-tight max-w-2xl">
           We Build{' '}
           <span className="italic font-light text-white/60">Digital</span>
           <br />Solutions{' '}
@@ -70,13 +53,13 @@ export default function Hero() {
 
         {/* Sous-titre */}
         <motion.p {...fade(0.7)}
-          className="mt-6 text-lg md:text-xl text-white/55 max-w-lg leading-relaxed">
+          className="mt-6 text-lg md:text-xl text-white/55 max-w-md leading-relaxed">
           Logiciels sur mesure, sites web et services IT
           depuis Ambam vers le monde entier.
         </motion.p>
 
         {/* CTAs */}
-        <motion.div {...fade(0.9)} className="mt-10 flex flex-wrap items-center justify-center gap-4">
+        <motion.div {...fade(0.9)} className="mt-10 flex flex-wrap items-center gap-4">
           <a href="#contact"
             className="bg-white text-[#0F172A] px-7 py-3.5 rounded-full font-semibold text-sm hover:bg-white/90 hover:scale-105 transition-all duration-200">
             Démarrer un projet →
@@ -89,13 +72,12 @@ export default function Hero() {
 
         {/* Stats row */}
         <motion.div {...fade(1.1, 20)}
-          className="mt-16 pt-8 border-t border-white/10 flex flex-wrap justify-center gap-12">
+          className="mt-16 pt-8 border-t border-white/10 flex flex-wrap gap-10 md:gap-16">
           {stats.map((s, i) => (
             <motion.div key={s.label}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 1.1 + i * 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="text-center">
+              transition={{ duration: 0.6, delay: 1.1 + i * 0.1, ease: [0.16, 1, 0.3, 1] }}>
               <div className="text-3xl font-black text-white">{s.n}</div>
               <div className="text-sm text-white/45 mt-1">{s.label}</div>
             </motion.div>
