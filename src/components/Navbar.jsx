@@ -24,7 +24,7 @@ export default function Navbar({ dark, setDark }) {
         ? 'bg-white/95 dark:bg-[#0A0A0A]/95 backdrop-blur border-b border-[#E5E5E5] dark:border-[#2A2A2A]'
         : 'bg-transparent'
     }`}>
-      <div className="container-xl mx-auto px-6 md:px-12 lg:px-20 flex items-center justify-between h-16">
+      <div className="w-full pl-6 pr-6 md:pl-12 lg:pl-16 md:pr-12 lg:pr-16 flex items-center justify-between h-16">
         {/* Logo — extrémité gauche */}
         <a href="#" aria-label="MMstack — retour en haut" className="flex items-center gap-2 shrink-0">
           <img
