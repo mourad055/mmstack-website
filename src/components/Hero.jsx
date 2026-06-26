@@ -34,7 +34,7 @@ export default function Hero() {
       <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/20 to-transparent" />
 
       {/* Contenu — ancré à gauche sur desktop */}
-      <div className="relative z-10 flex flex-col justify-center flex-1 px-6 md:px-12 lg:px-20 pt-32 pb-24 max-w-6xl mx-auto w-full">
+      <div className="relative z-10 flex flex-col justify-center flex-1 pl-6 pr-6 md:pl-12 lg:pl-16 pt-32 pb-24 w-full">
 
         {/* Badge */}
         <motion.div {...fade(0.2, 20)}
