@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Code2, Globe, HardDrive, GraduationCap, Wifi, Lightbulb } from 'lucide-react'
+import { Code2, Globe, HardDrive, Wifi, Lightbulb } from 'lucide-react'
 
 const services = [
   {
@@ -22,13 +22,6 @@ const services = [
     desc: 'Mise en place de logiciels professionnels, systèmes d\'exploitation et environnements de travail.',
     // Tech setup Africa
     img: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&q=70',
-  },
-  {
-    icon: GraduationCap,
-    title: 'Formation IT',
-    desc: 'Ateliers pratiques en bureautique, développement web, cybersécurité et outils numériques.',
-    // African students in classroom
-    img: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=600&q=70',
   },
   {
     icon: Wifi,

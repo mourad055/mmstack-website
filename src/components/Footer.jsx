@@ -8,8 +8,7 @@ const cols = [
     links: [
       { label: 'Développement logiciel', href: '#services' },
       { label: 'Création de sites web', href: '#services' },
-      { label: 'Formation IT', href: '#services' },
-      { label: 'Prestation à distance', href: '#services' },
+{ label: 'Prestation à distance', href: '#services' },
     ],
   },
   {
