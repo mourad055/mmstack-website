@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Code2, Globe, HardDrive, Wifi, Lightbulb } from 'lucide-react'
+import { Code2, Globe, HardDrive, Lightbulb } from 'lucide-react'
 
 const services = [
   {
@@ -22,13 +22,6 @@ const services = [
     desc: 'Mise en place de logiciels professionnels, systèmes d\'exploitation et environnements de travail.',
     // Tech setup Africa
     img: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&q=70',
-  },
-  {
-    icon: Wifi,
-    title: 'Prestation à distance',
-    desc: 'Développement freelance pour clients internationaux — même qualité, peu importe la distance.',
-    // African professional working remotely
-    img: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&q=70',
   },
   {
     icon: Lightbulb,
