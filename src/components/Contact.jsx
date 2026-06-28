@@ -144,8 +144,9 @@ export default function Contact() {
             {/* Ambam / Cameroun city image */}
             <div className="rounded-xl overflow-hidden h-48 border border-[#E5E5E5] dark:border-[#2A2A2A]">
               <img
-                src="https://images.unsplash.com/photo-1489392191049-fc10c97e64b6?w=700&q=70"
-                alt="Ambam Cameroun"
+                src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=700&q=75"
+                alt="Ambam Cameroun — centre-ville"
+                loading="lazy" crossOrigin="anonymous"
                 className="w-full h-full object-cover grayscale-[30%]" />
             </div>
           </motion.div>

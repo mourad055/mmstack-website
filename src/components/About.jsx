@@ -78,8 +78,9 @@ export default function About() {
             {/* Team photo */}
             <div className="rounded-xl overflow-hidden h-64 mt-2">
               <img
-                src="https://images.unsplash.com/photo-1596524430615-b46475ddff6e?w=900&q=80"
+                src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=900&q=75"
                 alt="L'équipe MMstack au travail"
+                loading="lazy" crossOrigin="anonymous"
                 className="w-full h-full object-cover grayscale-[20%]" />
             </div>
           </motion.div>

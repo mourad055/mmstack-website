@@ -6,24 +6,21 @@ const WA = '237697074455'
 
 const listings = [
   {
-    // African student room / simple bedroom
-    img: 'https://images.unsplash.com/photo-1555854877-bab0e564b8d5?w=600&q=70',
+    img: 'https://images.unsplash.com/photo-1484154218962-a197022b5858?w=600&q=75',
     quartier: 'Centre-ville',
     prix: '15 000',
     desc: 'Chambre meublée, eau courante, proche du marché central. Calme et sécurisée.',
     phone: '697000001',
   },
   {
-    // Simple African bedroom / studio
-    img: 'https://images.unsplash.com/photo-1484154218962-a197022b5858?w=600&q=70',
+    img: 'https://images.unsplash.com/photo-1555854877-bab0e564b8d5?w=600&q=75',
     quartier: 'Quartier Nkang',
     prix: '10 000',
     desc: 'Studio indépendant avec kitchenette, idéal pour étudiants. Proche établissements scolaires.',
     phone: '677000002',
   },
   {
-    // African house / residential
-    img: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=600&q=70',
+    img: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=600&q=75',
     quartier: 'Zone résidentielle',
     prix: '20 000',
     desc: 'Grande chambre en villa, clôturée, électricité 24h. Accès internet disponible.',
@@ -192,7 +189,7 @@ export default function Chambres() {
               transition={{ delay: i * 0.1 }}
               className="bg-white dark:bg-[#1A1A1A] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-xl overflow-hidden hover:-translate-y-1 transition-all duration-300">
               <div className="h-48 overflow-hidden">
-                <img src={l.img} alt={l.quartier} className="w-full h-full object-cover grayscale-[20%] hover:scale-105 transition-transform duration-500" />
+                <img src={l.img} alt={l.quartier} loading="lazy" crossOrigin="anonymous" className="w-full h-full object-cover grayscale-[20%] hover:scale-105 transition-transform duration-500" />
               </div>
               <div className="p-5">
                 <div className="flex items-center justify-between mb-2">

@@ -6,32 +6,28 @@ const projects = [
     title: 'MicroLab Virtuel',
     tag: 'Web Platform',
     desc: 'Plateforme pédagogique interactive avec IA intégrée (Anthropic API) pour les cours de réseau. Laravel + Vue.js 3 + Inertia.js.',
-    // African student on laptop studying
-    img: 'https://images.unsplash.com/photo-1571260899304-425eee4c7efc?w=800&q=70',
+    img: 'https://images.unsplash.com/photo-1571260899304-425eee4c7efc?w=800&q=75',
     link: '#',
   },
   {
     title: 'MBIO App',
     tag: 'Mobile · Flutter',
     desc: 'Application de taxi-hailing pour le marché camerounais. Google Maps, Firebase, JWT, Twilio OTP.',
-    // African city street / urban mobility
-    img: 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=800&q=70',
+    img: 'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=800&q=75',
     link: '#',
   },
   {
     title: 'DocForge',
     tag: 'SaaS · React',
     desc: 'Générateur de documents académiques au format ESTLC officiel. FastAPI + React + LaTeX pipeline.',
-    // African student writing documents
-    img: 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&q=70',
+    img: 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&q=75',
     link: '#',
   },
   {
     title: 'Site Hôtel Ambam',
     tag: 'Site vitrine',
     desc: 'Site web vitrine avec système de réservation pour un hôtel local. Responsive, SEO optimisé.',
-    // African hotel / hospitality
-    img: 'https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=800&q=70',
+    img: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=800&q=75',
     link: '#',
   },
 ]
@@ -59,7 +55,7 @@ export default function Portfolio() {
               className="group bg-white dark:bg-[#1A1A1A] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-xl overflow-hidden hover:-translate-y-1 transition-all duration-300">
               {/* Image */}
               <div className="h-52 overflow-hidden relative">
-                <img src={p.img} alt={p.title}
+                <img src={p.img} alt={p.title} loading="lazy" crossOrigin="anonymous"
                   className="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
                 <span className="absolute top-4 left-4 bg-white/90 dark:bg-[#0A0A0A]/90 text-[#0A0A0A] dark:text-white text-xs font-semibold px-3 py-1 rounded-full">

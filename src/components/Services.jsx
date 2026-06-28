@@ -6,29 +6,25 @@ const services = [
     icon: Code2,
     title: 'Développement logiciel',
     desc: 'Applications sur mesure pour résoudre vos problèmes spécifiques — web, mobile et desktop.',
-    // African developer coding
-    img: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?w=600&q=70',
+    img: 'https://images.unsplash.com/photo-1587614382346-4ec70e388b28?w=600&q=75',
   },
   {
     icon: Globe,
     title: 'Création de sites web',
     desc: 'Sites vitrine pour hôtels, commerces, institutions — modernes, rapides et optimisés SEO.',
-    // African businessman with phone/laptop
-    img: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&q=70',
+    img: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&q=75',
   },
   {
     icon: HardDrive,
     title: 'Installation & config',
     desc: 'Mise en place de logiciels professionnels, systèmes d\'exploitation et environnements de travail.',
-    // Tech setup Africa
-    img: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&q=70',
+    img: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&q=75',
   },
   {
     icon: Lightbulb,
     title: 'Conseil IT',
     desc: 'Audit de vos besoins numériques et accompagnement dans votre transformation digitale.',
-    // African business meeting
-    img: 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=600&q=70',
+    img: 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=600&q=75',
   },
 ]
 
@@ -62,7 +58,7 @@ export default function Services() {
                 className="group overflow-hidden rounded-xl border border-[#E5E5E5] dark:border-[#2A2A2A] bg-[#F5F5F5] dark:bg-[#1A1A1A] hover:-translate-y-1 transition-all duration-300 cursor-default">
                 {/* Image */}
                 <div className="h-44 overflow-hidden">
-                  <img src={s.img} alt={s.title}
+                  <img src={s.img} alt={s.title} loading="lazy" crossOrigin="anonymous"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 grayscale-[30%]" />
                 </div>
                 <div className="p-7">
