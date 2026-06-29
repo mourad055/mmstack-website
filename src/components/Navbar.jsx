@@ -26,14 +26,22 @@ export default function Navbar({ dark, setDark }) {
     }`}>
       <div className="w-full pl-6 pr-6 md:pl-12 lg:pl-16 md:pr-12 lg:pr-16 flex items-center justify-between h-16">
         {/* Logo — extrémité gauche */}
-        <a href="#" aria-label="MMstack — retour en haut" className="flex items-center gap-2 shrink-0">
+        <a href="#" className="flex items-center gap-2 shrink-0">
           <img
-            src={dark ? '/logo-icon-light.png' : '/logo-icon-dark.png'}
-            alt="Logo MMstack — cygne origami"
-            width="461" height="331"
-            className="h-8 w-auto object-contain"
+            src="/logo-icon-dark.png"
+            alt="MMstack logo"
+            className="h-7 sm:h-8 w-auto object-contain dark:hidden"
           />
-          <span className="text-xl font-normal text-[#0A0A0A] dark:text-white">MMstack</span>
+          <img
+            src="/logo-icon-light.png"
+            alt="MMstack logo"
+            className="h-7 sm:h-8 w-auto object-contain hidden dark:block"
+          />
+          <span
+            className="text-base sm:text-lg text-[#0A0A0A] dark:text-white tracking-wide"
+            style={{ fontFamily: "'Playfair Display', Georgia, serif", fontWeight: 500 }}>
+            MM<span style={{ fontWeight: 300, letterSpacing: '0.09em' }}>stack</span>
+          </span>
         </a>
 
         {/* Desktop : nav + actions groupés à droite */}
