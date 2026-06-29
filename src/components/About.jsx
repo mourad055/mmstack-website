@@ -93,7 +93,7 @@ export default function About() {
               <DotGrid />
               <div className="relative z-10 text-center px-6">
                 <p className="text-white/50 font-mono text-xs tracking-widest uppercase mb-2">L'équipe MMstack</p>
-                <p className="text-white text-2xl font-black">Mike & Mourad</p>
+                <p className="text-white text-2xl font-black">Notre équipe</p>
                 <p className="text-[#38BDF8] text-xs mt-1 tracking-widest">Ambam · Cameroun 🇨🇲</p>
               </div>
             </div>
