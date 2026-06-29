@@ -141,13 +141,22 @@ export default function Contact() {
               )
             })}
 
-            {/* Ambam / Cameroun city image */}
-            <div className="rounded-xl overflow-hidden h-48 border border-[#E5E5E5] dark:border-[#2A2A2A]">
-              <img
-                src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=700&q=75"
-                alt="Ambam Cameroun — centre-ville"
-                loading="lazy" crossOrigin="anonymous"
-                className="w-full h-full object-cover grayscale-[30%]" />
+            {/* Carte stylisée Ambam */}
+            <div className="rounded-xl h-48 border border-[#E5E5E5] dark:border-[#2A2A2A] bg-[#0F172A] relative overflow-hidden flex items-center justify-center">
+              <svg className="absolute inset-0 w-full h-full opacity-[0.07]" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <pattern id="contact-grid" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse">
+                    <path d="M 24 0 L 0 0 0 24" fill="none" stroke="white" strokeWidth="0.5" />
+                  </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#contact-grid)" />
+              </svg>
+              <div className="relative z-10 text-center">
+                <div className="text-3xl mb-2">📍</div>
+                <p className="text-white font-bold text-sm">Ambam</p>
+                <p className="text-white/40 text-xs">Région du Sud · Cameroun</p>
+                <p className="text-[#38BDF8] text-xs mt-2 font-mono">3.0085° N, 11.2617° E</p>
+              </div>
             </div>
           </motion.div>
         </div>

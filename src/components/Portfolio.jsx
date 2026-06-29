@@ -5,32 +5,82 @@ const projects = [
   {
     title: 'MicroLab Virtuel',
     tag: 'Web Platform',
-    desc: 'Plateforme pédagogique interactive avec IA intégrée (Anthropic API) pour les cours de réseau. Laravel + Vue.js 3 + Inertia.js.',
-    img: 'https://images.unsplash.com/photo-1571260899304-425eee4c7efc?w=800&q=75',
+    desc: 'Plateforme pédagogique interactive avec IA intégrée. Laravel + Vue.js 3.',
+    bgColor: '#0F172A',
+    accentColor: '#38BDF8',
+    icon: '🔬',
+    lines: ['import { Claude } from "@anthropic"', 'const lab = new VirtualLab()', 'lab.run(experiment)'],
     link: '#',
   },
   {
     title: 'MBIO App',
     tag: 'Mobile · Flutter',
-    desc: 'Application de taxi-hailing pour le marché camerounais. Google Maps, Firebase, JWT, Twilio OTP.',
-    img: 'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=800&q=75',
+    desc: 'Application taxi-hailing camerounaise. Firebase, Google Maps.',
+    bgColor: '#0A0A0A',
+    accentColor: '#34D399',
+    icon: '🚕',
+    lines: ['Widget build(context) {', '  return MBIOApp(', '    city: "Ambam, CM")'],
     link: '#',
   },
   {
     title: 'DocForge',
     tag: 'SaaS · React',
-    desc: 'Générateur de documents académiques au format ESTLC officiel. FastAPI + React + LaTeX pipeline.',
-    img: 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&q=75',
+    desc: 'Générateur de documents ESTLC. FastAPI + React + LaTeX.',
+    bgColor: '#1E1B4B',
+    accentColor: '#A78BFA',
+    icon: '📄',
+    lines: ['POST /api/generate', '{ "type": "rapport_stage",', '  "student": "NKWANE M." }'],
     link: '#',
   },
   {
     title: 'Site Hôtel Ambam',
     tag: 'Site vitrine',
-    desc: 'Site web vitrine avec système de réservation pour un hôtel local. Responsive, SEO optimisé.',
-    img: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=800&q=75',
+    desc: 'Site avec réservation pour hôtel local. Responsive + SEO.',
+    bgColor: '#0C1A12',
+    accentColor: '#34D399',
+    icon: '🏨',
+    lines: ['<HotelPage>', '  <BookingSystem />', '</HotelPage>'],
     link: '#',
   },
 ]
+
+function BrowserMockup({ project }) {
+  const slug = project.title.toLowerCase().replace(/ /g, '-')
+  return (
+    <div className="h-52 relative overflow-hidden rounded-t-xl" style={{ backgroundColor: project.bgColor }}>
+      {/* Browser bar */}
+      <div className="flex items-center gap-1.5 px-4 pt-4 pb-2">
+        <div className="w-2.5 h-2.5 rounded-full bg-white/20" />
+        <div className="w-2.5 h-2.5 rounded-full bg-white/20" />
+        <div className="w-2.5 h-2.5 rounded-full bg-white/20" />
+        <div className="flex-1 ml-2 h-4 rounded bg-white/10 flex items-center px-2">
+          <span className="text-white/30 text-[9px] font-mono">mmstack.cm/{slug}</span>
+        </div>
+      </div>
+
+      {/* Code area */}
+      <div className="px-4 py-3 font-mono text-xs leading-6">
+        {project.lines.map((line, i) => (
+          <div key={i} className="flex gap-3">
+            <span className="text-white/20 select-none w-3">{i + 1}</span>
+            <span style={{ color: i === 0 ? project.accentColor : 'rgba(255,255,255,0.6)' }}>{line}</span>
+          </div>
+        ))}
+      </div>
+
+      {/* Big icon */}
+      <div className="absolute bottom-4 right-4 text-3xl opacity-20">{project.icon}</div>
+
+      {/* Gradient */}
+      <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-black/40 to-transparent" />
+
+      {/* Tag */}
+      <span className="absolute top-10 right-3 text-[10px] font-semibold bg-white/10 text-white/70 px-2 py-0.5 rounded-full border border-white/10">
+        {project.tag}
+      </span>
+    </div>
+  )
+}
 
 export default function Portfolio() {
   return (
@@ -53,15 +103,7 @@ export default function Portfolio() {
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
               className="group bg-white dark:bg-[#1A1A1A] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-xl overflow-hidden hover:-translate-y-1 transition-all duration-300">
-              {/* Image */}
-              <div className="h-52 overflow-hidden relative">
-                <img src={p.img} alt={p.title} loading="lazy" crossOrigin="anonymous"
-                  className="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-                <span className="absolute top-4 left-4 bg-white/90 dark:bg-[#0A0A0A]/90 text-[#0A0A0A] dark:text-white text-xs font-semibold px-3 py-1 rounded-full">
-                  {p.tag}
-                </span>
-              </div>
+              <BrowserMockup project={p} />
               <div className="p-6 flex items-start justify-between gap-4">
                 <div>
                   <h3 className="font-bold text-[#0A0A0A] dark:text-white text-lg mb-2">{p.title}</h3>

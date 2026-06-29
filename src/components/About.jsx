@@ -10,13 +10,26 @@ const values = [
 const pillars = [
   {
     title: 'Ancrage local',
-    desc: 'Nés et formés en Afrique centrale, nous comprenons les réalités du terrain : connectivité variable, appareils d\'entrée de gamme, contextes économiques spécifiques.',
+    desc: "Nés et formés en Afrique centrale, nous comprenons les réalités du terrain : connectivité variable, appareils d'entrée de gamme, contextes économiques spécifiques.",
   },
   {
     title: 'Expertise technique',
     desc: 'Formation en génie informatique, spécialisations en développement fullstack, cybersécurité et systèmes logistiques intelligents.',
   },
 ]
+
+function DotGrid() {
+  return (
+    <svg className="absolute inset-0 w-full h-full opacity-[0.08]" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="about-dots" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+          <circle cx="1" cy="1" r="1" fill="white" />
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#about-dots)" />
+    </svg>
+  )
+}
 
 export default function About() {
   return (
@@ -75,13 +88,14 @@ export default function About() {
               </div>
             ))}
 
-            {/* Team photo */}
-            <div className="rounded-xl overflow-hidden h-64 mt-2">
-              <img
-                src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=900&q=75"
-                alt="L'équipe MMstack au travail"
-                loading="lazy" crossOrigin="anonymous"
-                className="w-full h-full object-cover grayscale-[20%]" />
+            {/* Styled team block */}
+            <div className="rounded-xl overflow-hidden h-52 mt-2 bg-[#0F172A] flex items-center justify-center relative">
+              <DotGrid />
+              <div className="relative z-10 text-center px-6">
+                <p className="text-white/50 font-mono text-xs tracking-widest uppercase mb-2">L'équipe MMstack</p>
+                <p className="text-white text-2xl font-black">Mike & Mourad</p>
+                <p className="text-[#38BDF8] text-xs mt-1 tracking-widest">Ambam · Cameroun 🇨🇲</p>
+              </div>
             </div>
           </motion.div>
 

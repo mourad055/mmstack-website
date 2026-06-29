@@ -1,32 +1,68 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Home, MapPin, Phone, User, School, Wallet, MessageSquare, CheckCircle2, Building2 } from 'lucide-react'
+import { Home, MapPin, Phone, User, Wallet, MessageSquare, CheckCircle2, Building2 } from 'lucide-react'
 
 const WA = '237697074455'
 
 const listings = [
   {
-    img: 'https://images.unsplash.com/photo-1484154218962-a197022b5858?w=600&q=75',
+    bgColor: '#0F172A',
+    accent: '#38BDF8',
+    icon: '🏠',
+    badge: 'Meublée',
+    mention: 'Eau courante · Wi-Fi',
     quartier: 'Centre-ville',
     prix: '15 000',
     desc: 'Chambre meublée, eau courante, proche du marché central. Calme et sécurisée.',
     phone: '697000001',
   },
   {
-    img: 'https://images.unsplash.com/photo-1555854877-bab0e564b8d5?w=600&q=75',
+    bgColor: '#0C1A12',
+    accent: '#34D399',
+    icon: '🛋️',
+    badge: 'Studio',
+    mention: 'Kitchenette · Calme',
     quartier: 'Quartier Nkang',
     prix: '10 000',
     desc: 'Studio indépendant avec kitchenette, idéal pour étudiants. Proche établissements scolaires.',
     phone: '677000002',
   },
   {
-    img: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=600&q=75',
+    bgColor: '#1A0F2E',
+    accent: '#A78BFA',
+    icon: '🏡',
+    badge: 'Villa',
+    mention: 'Électricité 24h · Clôturée',
     quartier: 'Zone résidentielle',
     prix: '20 000',
     desc: 'Grande chambre en villa, clôturée, électricité 24h. Accès internet disponible.',
     phone: '655000003',
   },
 ]
+
+function ListingVisual({ l }) {
+  return (
+    <div className="h-48 relative overflow-hidden" style={{ backgroundColor: l.bgColor }}>
+      {/* Dot grid */}
+      <svg className="absolute inset-0 w-full h-full opacity-[0.08]" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id={`ch-${l.quartier}`} x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+            <circle cx="1" cy="1" r="1" fill="white" />
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill={`url(#ch-${l.quartier})`} />
+      </svg>
+      <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 text-center">
+        <span className="text-4xl opacity-80">{l.icon}</span>
+        <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full"
+          style={{ color: l.accent, backgroundColor: l.accent + '18' }}>
+          {l.badge}
+        </span>
+        <p className="text-white/40 text-[10px] px-4 leading-5">{l.mention}</p>
+      </div>
+    </div>
+  )
+}
 
 function buildWaMsg(data, type) {
   if (type === 'etudiant') {
@@ -152,8 +188,8 @@ export default function Chambres() {
         <div className="bg-white dark:bg-[#1A1A1A] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-2xl overflow-hidden mb-12">
           <div className="flex border-b border-[#E5E5E5] dark:border-[#2A2A2A]">
             {[
-              { key: 'etudiant', label: '🎓 Je cherche une chambre', icon: User },
-              { key: 'bailleur', label: '🏠 Je suis bailleur', icon: Home },
+              { key: 'etudiant', label: '🎓 Je cherche une chambre' },
+              { key: 'bailleur', label: '🏠 Je suis bailleur' },
             ].map(t => (
               <button key={t.key} onClick={() => setTab(t.key)}
                 className={`flex-1 py-4 text-sm font-semibold transition-all duration-200 ${
@@ -188,15 +224,15 @@ export default function Chambres() {
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
               className="bg-white dark:bg-[#1A1A1A] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-xl overflow-hidden hover:-translate-y-1 transition-all duration-300">
-              <div className="h-48 overflow-hidden">
-                <img src={l.img} alt={l.quartier} loading="lazy" crossOrigin="anonymous" className="w-full h-full object-cover grayscale-[20%] hover:scale-105 transition-transform duration-500" />
-              </div>
+              <ListingVisual l={l} />
               <div className="p-5">
                 <div className="flex items-center justify-between mb-2">
                   <div className="flex items-center gap-1.5 text-[#8A8A8A] text-xs">
                     <MapPin size={12} />{l.quartier}
                   </div>
-                  <span className="font-extrabold text-[#0A0A0A] dark:text-white text-sm">{l.prix} XAF<span className="font-normal text-[#8A8A8A]">/mois</span></span>
+                  <span className="font-extrabold text-[#0A0A0A] dark:text-white text-sm">
+                    {l.prix} XAF<span className="font-normal text-[#8A8A8A]">/mois</span>
+                  </span>
                 </div>
                 <p className="text-xs text-[#8A8A8A] leading-relaxed mb-4">{l.desc}</p>
                 <a href={`https://wa.me/237${l.phone}?text=${encodeURIComponent('Bonjour, je suis intéressé par votre chambre à ' + l.quartier + ' (via MMstack).')}`}

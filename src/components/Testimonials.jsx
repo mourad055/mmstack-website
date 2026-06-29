@@ -1,23 +1,21 @@
 import { motion } from 'framer-motion'
+import InitialsAvatar from '../utils/InitialsAvatar'
 
 const testimonials = [
   {
     quote: "MMstack nous a livré notre site web en une semaine. Résultat : moderne, rapide, et nos clients le trouvent facilement sur Google. Excellent travail.",
     name: "Rodrigue Ateba",
     role: "Gérant, Hôtel Central Ambam",
-    img: 'https://images.unsplash.com/photo-1522529599102-193c0d76b5b6?w=200&q=80',
   },
   {
     quote: "DocForge m'a sauvé la mise pour mes rapports de stage. Plus besoin de passer des heures sur Word — tout est formaté automatiquement aux normes de l'école.",
     name: "Chanceline Mendo",
     role: "Étudiante, ESTLC Ébolowa",
-    img: 'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=200&q=80',
   },
   {
     quote: "Formation informatique très pratique et adaptée. Mourad et Mike connaissent vraiment leur sujet et savent l'expliquer à des non-techniciens.",
     name: "Pastor Emmanuel Nkoa",
     role: "Directeur, Lycée technique d'Ambam",
-    img: 'https://images.unsplash.com/photo-1560250097-0dc05ae8c91c?w=200&q=80',
   },
 ]
 
@@ -47,7 +45,7 @@ export default function Testimonials() {
                 <p className="text-[#0A0A0A] dark:text-[#F5F5F5] text-sm leading-relaxed mb-6">{t.quote}</p>
               </div>
               <div className="flex items-center gap-3 pt-5 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
-                <img src={t.img} alt={t.name} loading="lazy" crossOrigin="anonymous" className="w-10 h-10 rounded-full object-cover grayscale" />
+                <InitialsAvatar name={t.name} size={40} />
                 <div>
                   <div className="font-semibold text-[#0A0A0A] dark:text-white text-sm">{t.name}</div>
                   <div className="text-[#8A8A8A] text-xs">{t.role}</div>
