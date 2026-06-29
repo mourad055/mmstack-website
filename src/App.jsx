@@ -24,7 +24,7 @@ export default function App() {
         <div className="border-t border-[#E5E5E5] dark:border-[#2A2A2A]" />
         <Contact />
       </main>
-      <Footer />
+      <Footer dark={dark} setDark={setDark} />
       <WhatsAppButton />
     </div>
   )

@@ -1,4 +1,4 @@
-import { Github, Linkedin, MessageCircle, ArrowUpRight } from 'lucide-react'
+import { Mail, Github, Linkedin, MessageCircle, ArrowUp, Sun, Moon } from 'lucide-react'
 
 const WA = '237697074455'
 
@@ -8,66 +8,95 @@ const cols = [
     links: [
       { label: 'Développement logiciel', href: '#services' },
       { label: 'Création de sites web', href: '#services' },
+      { label: 'Installation & config', href: '#services' },
+      { label: 'Conseil IT', href: '#services' },
     ],
   },
   {
     title: 'Entreprise',
     links: [
       { label: 'À propos', href: '#about' },
+      { label: 'Notre équipe', href: '#about' },
+      { label: 'Témoignages', href: '#' },
+    ],
+  },
+  {
+    title: 'Projets',
+    links: [
+      { label: 'MicroLab Virtuel', href: '#' },
+      { label: 'MBIO App', href: '#' },
+      { label: 'DocForge', href: '#' },
+      { label: 'Site Hôtel Ambam', href: '#' },
+    ],
+  },
+  {
+    title: 'Stack',
+    links: [
+      { label: 'React & Next.js', href: '#' },
+      { label: 'FastAPI & Laravel', href: '#' },
+      { label: 'Flutter', href: '#' },
+      { label: 'Cybersécurité', href: '#' },
+    ],
+  },
+  {
+    title: 'Localisation',
+    links: [
+      { label: 'Ambam', href: '#contact' },
+      { label: 'Région du Sud', href: '#contact' },
+      { label: 'Cameroun 🇨🇲', href: '#contact' },
+      { label: 'Afrique centrale', href: '#contact' },
     ],
   },
   {
     title: 'Contact',
     links: [
-      { label: 'nkwanemourad50@gmail.com', href: 'mailto:nkwanemourad50@gmail.com' },
+      { label: 'Nous écrire', href: '#contact' },
       { label: 'WhatsApp', href: `https://wa.me/${WA}` },
-      { label: 'Ambam, Cameroun 🇨🇲', href: '#' },
+      { label: 'GitHub', href: 'https://github.com' },
+      { label: 'LinkedIn', href: 'https://linkedin.com' },
     ],
   },
 ]
 
-export default function Footer() {
-  return (
-    <footer className="bg-[#0A0A0A] py-16 px-6 md:px-12 lg:px-20">
-      <div className="max-w-6xl mx-auto">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-10 mb-14">
-          {/* Brand col */}
-          <div className="col-span-2 md:col-span-1">
-            <a href="#" aria-label="MMstack — retour en haut" className="inline-flex items-center gap-2 mb-3">
-              <img
-                src="/logo-icon-light.png"
-                alt="Logo MMstack — cygne origami"
-                width="461" height="331"
-                className="h-7 w-auto object-contain"
-              />
-              <span className="text-xl font-normal text-white">MMstack</span>
-            </a>
-            <p className="text-[#8A8A8A] text-sm leading-relaxed mb-5">
-              Digital solutions from Cameroon to the world.
-            </p>
-            <div className="flex gap-3">
-              {[
-                { icon: Linkedin, href: 'https://linkedin.com', label: 'LinkedIn' },
-                { icon: Github, href: 'https://github.com', label: 'GitHub' },
-                { icon: MessageCircle, href: `https://wa.me/${WA}`, label: 'WhatsApp' },
-              ].map(s => (
-                <a key={s.label} href={s.href} target="_blank" rel="noreferrer" aria-label={s.label}
-                  className="w-9 h-9 rounded-lg border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors duration-200">
-                  <s.icon size={15} className="text-[#8A8A8A]" />
-                </a>
-              ))}
-            </div>
-          </div>
+const socials = [
+  { icon: Mail, href: 'mailto:nkwanemourad50@gmail.com', label: 'Email' },
+  { icon: MessageCircle, href: `https://wa.me/${WA}`, label: 'WhatsApp' },
+  { icon: Github, href: 'https://github.com', label: 'GitHub' },
+  { icon: Linkedin, href: 'https://linkedin.com', label: 'LinkedIn' },
+]
 
-          {/* Nav cols */}
+export default function Footer({ dark, setDark }) {
+  return (
+    <footer className="bg-[#0A0A0A] border-t border-white/5">
+      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16">
+
+        {/* Top — logo + description */}
+        <div className="flex flex-col md:flex-row md:items-center gap-6 py-12 border-b border-white/8">
+          <a href="#" className="flex items-center gap-2.5 shrink-0">
+            <img src="/logo-icon-light.png" alt="MMstack logo" className="h-8 w-auto object-contain" />
+            <span
+              className="text-lg text-white tracking-wide"
+              style={{ fontFamily: "'Playfair Display', Georgia, serif", fontWeight: 500 }}>
+              MM<span style={{ fontWeight: 300, letterSpacing: '0.09em' }}>stack</span>
+            </span>
+          </a>
+          <p className="text-white/40 text-sm leading-relaxed max-w-2xl md:ml-6 md:pl-6 md:border-l md:border-white/10">
+            MMstack conçoit des logiciels sur mesure, des sites web et des services IT pour les entreprises
+            d'Afrique centrale. Basés à Ambam, Cameroun — nous construisons du digital qui tient.
+          </p>
+        </div>
+
+        {/* Middle — link columns */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-8 py-12 border-b border-white/8">
           {cols.map(col => (
             <div key={col.title}>
-              <div className="text-xs font-semibold text-white uppercase tracking-widest mb-4">{col.title}</div>
+              <div className="text-white/90 text-xs font-semibold uppercase tracking-widest mb-4">{col.title}</div>
               <ul className="space-y-2.5">
                 {col.links.map(l => (
                   <li key={l.label}>
-                    <a href={l.href}
-                      className="text-sm text-[#8A8A8A] hover:text-white transition-colors duration-200 flex items-center gap-1 group">
+                    <a href={l.href} target={l.href.startsWith('http') ? '_blank' : undefined}
+                      rel={l.href.startsWith('http') ? 'noreferrer' : undefined}
+                      className="text-sm text-white/35 hover:text-white transition-colors duration-200">
                       {l.label}
                     </a>
                   </li>
@@ -77,11 +106,48 @@ export default function Footer() {
           ))}
         </div>
 
-        {/* Divider */}
-        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-[#8A8A8A] text-xs">© 2025 MMstack. All rights reserved.</p>
-          <p className="text-[#8A8A8A] text-xs">Made with ❤️ in 🇨🇲 Cameroon</p>
+        {/* Social icons + controls */}
+        <div className="flex flex-wrap items-center justify-center gap-4 py-8 border-b border-white/8">
+          {socials.map(s => (
+            <a key={s.label} href={s.href}
+              target={s.href.startsWith('http') ? '_blank' : undefined}
+              rel={s.href.startsWith('http') ? 'noreferrer' : undefined}
+              aria-label={s.label}
+              className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/40 hover:text-white hover:border-white/30 transition-all duration-200">
+              <s.icon size={16} />
+            </a>
+          ))}
+
+          {/* Séparateur visuel */}
+          <div className="w-px h-6 bg-white/10 mx-1" />
+
+          {/* Scroll to top */}
+          <button
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            aria-label="Retour en haut"
+            className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/40 hover:text-white hover:border-white/30 transition-all duration-200">
+            <ArrowUp size={16} />
+          </button>
+
+          {/* Dark / light toggle */}
+          {setDark && (
+            <button
+              onClick={() => setDark(!dark)}
+              aria-label="Changer le thème"
+              className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/40 hover:text-white hover:border-white/30 transition-all duration-200">
+              {dark ? <Sun size={16} /> : <Moon size={16} />}
+            </button>
+          )}
         </div>
+
+        {/* Bottom copyright */}
+        <div className="py-6 text-center">
+          <p className="text-white/25 text-xs">
+            © 2026 MMstack · Fait avec ❤️ depuis{' '}
+            <span className="text-white/40">Ambam, Cameroun 🇨🇲</span>
+          </p>
+        </div>
+
       </div>
     </footer>
   )
