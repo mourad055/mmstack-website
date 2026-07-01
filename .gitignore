@@ -7,3 +7,6 @@ dist
 .claude/
 .impeccable/
 .mp/
+
+# Sources vidéo brutes (assets de travail, hors build)
+mmstack-video-asset/

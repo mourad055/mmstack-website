@@ -10,6 +10,11 @@
 - Push automatiquement vers `origin main` après chaque commit
 - Si un push échoue, explique pourquoi avant de réessayer
 
+## Déploiement VPS
+- Après CHAQUE `git push origin main` réussi, exécuter `mp push` pour
+  mettre à jour le VPS
+- Si `mp push` échoue, expliquer pourquoi avant de réessayer
+
 ## Règles de sécurité
 - Ne jamais faire de force push
 - Ne jamais commit le dossier node_modules, .env, ou .claude/
