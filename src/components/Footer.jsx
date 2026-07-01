@@ -1,4 +1,33 @@
-import { Mail, Github, Linkedin, MessageCircle, ArrowUp, Sun, Moon } from 'lucide-react'
+import { useState, useEffect } from 'react'
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
+import { Mail, Github, Linkedin, MessageCircle, ArrowUp, ChevronUp, Sun, Moon } from 'lucide-react'
+
+/* Bouton back-to-top — apparaît après 500px, en bas à gauche */
+export function BackToTop() {
+  const [show, setShow] = useState(false)
+  useEffect(() => {
+    const onScroll = () => setShow(window.scrollY > 500)
+    window.addEventListener('scroll', onScroll)
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+  return (
+    <AnimatePresence>
+      {show && (
+        <motion.button
+          initial={{ opacity: 0, scale: 0.6 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.6 }}
+          whileHover={{ y: -4, scale: 1.08, boxShadow: '0 0 20px rgba(56,189,248,0.3)' }}
+          whileTap={{ scale: 0.95 }}
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          aria-label="Retour en haut"
+          className="fixed bottom-6 left-6 z-40 w-12 h-12 rounded-full bg-[#0A0A0A] dark:bg-white text-white dark:text-[#0A0A0A] border border-white/10 dark:border-black/10 flex items-center justify-center">
+          <ChevronUp size={20} />
+        </motion.button>
+      )}
+    </AnimatePresence>
+  )
+}
 
 const WA = '237697074455'
 
@@ -66,6 +95,7 @@ const socials = [
 ]
 
 export default function Footer({ dark, setDark }) {
+  const reduce = useReducedMotion()
   return (
     <footer className="bg-[#0A0A0A] border-t border-white/5">
       <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16">
@@ -86,10 +116,14 @@ export default function Footer({ dark, setDark }) {
           </p>
         </div>
 
-        {/* Middle — link columns */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-8 py-12 border-b border-white/8">
+        {/* Middle — link columns (stagger au scroll) */}
+        <motion.div
+          initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-60px' }}
+          variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.08 } } }}
+          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-8 py-12 border-b border-white/8">
           {cols.map(col => (
-            <div key={col.title}>
+            <motion.div key={col.title}
+              variants={{ hidden: reduce ? { opacity: 1 } : { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5 } } }}>
               <div className="text-white/90 text-xs font-semibold uppercase tracking-widest mb-4">{col.title}</div>
               <ul className="space-y-2.5">
                 {col.links.map(l => (
@@ -102,9 +136,9 @@ export default function Footer({ dark, setDark }) {
                   </li>
                 ))}
               </ul>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         {/* Social icons + controls */}
         <div className="flex flex-wrap items-center justify-center gap-4 py-8 border-b border-white/8">

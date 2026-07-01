@@ -1,5 +1,6 @@
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 import { Code2, Globe, HardDrive, Lightbulb } from 'lucide-react'
+import { SpotlightCard } from '../utils/premium'
 
 const DotGrid = ({ id }) => (
   <svg className="absolute inset-0 w-full h-full opacity-[0.08]" xmlns="http://www.w3.org/2000/svg">
@@ -11,7 +12,6 @@ const DotGrid = ({ id }) => (
     <rect width="100%" height="100%" fill={`url(#${id})`} />
   </svg>
 )
-
 const ScanLines = ({ id }) => (
   <svg className="absolute inset-0 w-full h-full opacity-[0.06]" xmlns="http://www.w3.org/2000/svg">
     <defs>
@@ -22,7 +22,6 @@ const ScanLines = ({ id }) => (
     <rect width="100%" height="100%" fill={`url(#${id})`} />
   </svg>
 )
-
 const GridLines = ({ id }) => (
   <svg className="absolute inset-0 w-full h-full opacity-[0.07]" xmlns="http://www.w3.org/2000/svg">
     <defs>
@@ -33,7 +32,6 @@ const GridLines = ({ id }) => (
     <rect width="100%" height="100%" fill={`url(#${id})`} />
   </svg>
 )
-
 const Hexagons = ({ id }) => (
   <svg className="absolute inset-0 w-full h-full opacity-[0.06]" xmlns="http://www.w3.org/2000/svg">
     <defs>
@@ -47,93 +45,83 @@ const Hexagons = ({ id }) => (
 
 const services = [
   {
-    icon: Code2,
-    title: 'Développement logiciel',
-    desc: 'Applications sur mesure pour résoudre vos problèmes spécifiques — web, mobile et desktop.',
-    Pattern: DotGrid,
-    patternId: 'svc-dots',
-    badge: 'Full-stack',
-    badgeColor: '#38BDF8',
+    icon: Code2, title: 'Développement logiciel',
+    desc: 'Applications sur mesure pour résoudre vos problèmes spécifiques — web, mobile et desktop. Du concept au déploiement, on construit des produits qui tiennent la charge.',
+    Pattern: DotGrid, patternId: 'svc-dots', badge: 'Full-stack', badgeColor: '#38BDF8',
+    span: 'md:col-span-2 md:row-span-2', big: true,
   },
   {
-    icon: Globe,
-    title: 'Création de sites web',
-    desc: 'Sites vitrine pour hôtels, commerces, institutions — modernes, rapides et optimisés SEO.',
-    Pattern: ScanLines,
-    patternId: 'svc-lines',
-    badge: 'React · WordPress',
-    badgeColor: '#34D399',
+    icon: Globe, title: 'Création de sites web',
+    desc: 'Sites vitrine modernes, rapides et optimisés SEO.',
+    Pattern: ScanLines, patternId: 'svc-lines', badge: 'React · WordPress', badgeColor: '#34D399',
+    span: 'md:col-span-1',
   },
   {
-    icon: HardDrive,
-    title: 'Installation & config',
-    desc: "Mise en place de logiciels professionnels, systèmes d'exploitation et environnements de travail.",
-    Pattern: GridLines,
-    patternId: 'svc-grid',
-    badge: 'Windows · Linux · macOS',
-    badgeColor: '#A78BFA',
+    icon: HardDrive, title: 'Installation & config',
+    desc: 'Logiciels pro, OS et environnements de travail.',
+    Pattern: GridLines, patternId: 'svc-grid', badge: 'Windows · Linux · macOS', badgeColor: '#A78BFA',
+    span: 'md:col-span-1',
   },
   {
-    icon: Lightbulb,
-    title: 'Conseil IT',
-    desc: 'Audit de vos besoins numériques et accompagnement dans votre transformation digitale.',
-    Pattern: Hexagons,
-    patternId: 'svc-hex',
-    badge: 'Audit · Stratégie',
-    badgeColor: '#34D399',
+    icon: Lightbulb, title: 'Conseil IT',
+    desc: 'Audit de vos besoins numériques et accompagnement dans votre transformation digitale — une stratégie claire, des priorités concrètes.',
+    Pattern: Hexagons, patternId: 'svc-hex', badge: 'Audit · Stratégie', badgeColor: '#34D399',
+    span: 'md:col-span-3',
   },
 ]
 
-const fadeUp = { hidden: { opacity: 0, y: 30 }, visible: i => ({ opacity: 1, y: 0, transition: { delay: i * 0.08, duration: 0.5 } }) }
-
 export default function Services() {
+  const reduce = useReducedMotion()
+  const container = {
+    hidden: {},
+    visible: { transition: { staggerChildren: reduce ? 0 : 0.12 } },
+  }
+  const cardVar = (big) => ({
+    hidden: reduce ? { opacity: 1 } : { opacity: 0, y: 80, scale: 0.95 },
+    visible: { opacity: 1, y: 0, scale: 1, transition: { duration: big ? 0.9 : 0.7, ease: [0.16, 1, 0.3, 1] } },
+  })
+
   return (
     <section id="services" className="section-pad bg-white dark:bg-[#0A0A0A]">
       <div className="container-xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}>
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
           <div className="text-xs font-semibold tracking-widest text-[#8A8A8A] uppercase mb-3">Ce qu'on fait</div>
           <h2 className="section-title">Nos services</h2>
           <p className="section-sub mb-14">Des solutions digitales pensées pour le contexte camerounais et africain.</p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {services.map((s, i) => {
+        <motion.div
+          variants={container} initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-80px' }}
+          className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-fr">
+          {services.map((s) => {
             const Icon = s.icon
             return (
-              <motion.div
-                key={s.title}
-                custom={i}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                variants={fadeUp}
-                className="group overflow-hidden rounded-xl border border-[#E5E5E5] dark:border-[#2A2A2A] bg-[#F5F5F5] dark:bg-[#1A1A1A] hover:-translate-y-1 transition-all duration-300 cursor-default">
-
-                {/* Visual block */}
-                <div className="relative h-44 bg-[#0F172A] flex flex-col items-center justify-center overflow-hidden">
-                  <s.Pattern id={s.patternId} />
-                  <div className="relative z-10 w-16 h-16 rounded-2xl bg-white/10 backdrop-blur flex items-center justify-center border border-white/10">
-                    <Icon size={30} className="text-white" />
+              <motion.div key={s.title} variants={cardVar(s.big)} className={s.span}>
+                <SpotlightCard className="h-full overflow-hidden rounded-xl border border-[#E5E5E5] dark:border-[#2A2A2A] bg-[#F5F5F5] dark:bg-[#1A1A1A] hover:-translate-y-1 transition-transform duration-300">
+                  {/* Visual block */}
+                  <div className={`relative ${s.big ? 'h-56' : 'h-44'} bg-[#0F172A] flex flex-col items-center justify-center overflow-hidden`}>
+                    <s.Pattern id={s.patternId} />
+                    <motion.div
+                      whileHover={reduce ? {} : { rotate: 12, scale: 1.1 }}
+                      transition={{ type: 'spring', stiffness: 300, damping: 18 }}
+                      className={`relative z-10 ${s.big ? 'w-20 h-20' : 'w-16 h-16'} rounded-2xl bg-white/10 backdrop-blur flex items-center justify-center border border-white/10`}>
+                      <Icon size={s.big ? 38 : 30} className="text-white" />
+                    </motion.div>
+                    <span className="relative z-10 mt-3 text-[10px] font-semibold px-2.5 py-0.5 rounded-full"
+                      style={{ color: s.badgeColor, backgroundColor: s.badgeColor + '1A' }}>
+                      {s.badge}
+                    </span>
                   </div>
-                  <span
-                    className="relative z-10 mt-3 text-[10px] font-semibold px-2.5 py-0.5 rounded-full"
-                    style={{ color: s.badgeColor, backgroundColor: s.badgeColor + '1A' }}>
-                    {s.badge}
-                  </span>
-                </div>
 
-                <div className="p-7">
-                  <h3 className="font-bold text-[#0A0A0A] dark:text-white text-lg mb-2">{s.title}</h3>
-                  <p className="text-[#8A8A8A] text-sm leading-relaxed">{s.desc}</p>
-                </div>
+                  <div className={s.big ? 'p-8' : 'p-7'}>
+                    <h3 className={`font-bold text-[#0A0A0A] dark:text-white mb-2 ${s.big ? 'text-2xl' : 'text-lg'}`}>{s.title}</h3>
+                    <p className={`text-[#8A8A8A] leading-relaxed ${s.big ? 'text-base max-w-md' : 'text-sm'}`}>{s.desc}</p>
+                  </div>
+                </SpotlightCard>
               </motion.div>
             )
           })}
-        </div>
+        </motion.div>
       </div>
     </section>
   )

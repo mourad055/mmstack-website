@@ -29,8 +29,17 @@
   transform-origin: center center;
 }
 
+/* Marquee tech stack — défilement infini lent */
+.marquee { display: flex; gap: 3rem; width: max-content; animation: marquee-scroll 80s linear infinite; }
+.marquee-track { display: flex; gap: 3rem; }
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .hero-video { animation: none; }
+  .marquee { animation: none; }
 }
 
 @layer utilities {
