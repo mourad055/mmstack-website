@@ -21,7 +21,7 @@ export default function Navbar({ dark, setDark }) {
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
       scrolled
-        ? 'bg-white/95 dark:bg-[#0A0A0A]/95 backdrop-blur border-b border-[#E5E5E5] dark:border-[#2A2A2A]'
+        ? 'bg-white/80 dark:bg-[#0A0E1A]/80 backdrop-blur-xl border-b border-[#E5E5E5] dark:border-white/10'
         : 'bg-transparent'
     }`}>
       <div className="w-full pl-6 pr-6 md:pl-12 lg:pl-16 md:pr-12 lg:pr-16 flex items-center justify-between h-16">
@@ -49,7 +49,7 @@ export default function Navbar({ dark, setDark }) {
           <nav className="flex items-center gap-8">
             {links.map(l => (
               <a key={l.href} href={l.href}
-                className="text-sm text-[#8A8A8A] hover:text-[#0A0A0A] dark:hover:text-white transition-colors duration-200">
+                className="link-underline text-sm text-[#8A8A8A] hover:text-[#0A0A0A] dark:hover:text-white transition-colors duration-200">
                 {l.label}
               </a>
             ))}

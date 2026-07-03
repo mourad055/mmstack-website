@@ -86,7 +86,7 @@ export default function Services() {
       <div className="container-xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
           <div className="text-xs font-semibold tracking-widest text-[#8A8A8A] uppercase mb-3">Ce qu'on fait</div>
-          <h2 className="section-title">Nos services</h2>
+          <h2 className="section-title">Nos <span className="text-gradient">services</span></h2>
           <p className="section-sub mb-14">Des solutions digitales pensées pour le contexte camerounais et africain.</p>
         </motion.div>
 

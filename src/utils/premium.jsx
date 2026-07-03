@@ -137,5 +137,5 @@ export function ScrollProgress() {
 
 /* ── Section divider (gradient accent) ── */
 export function SectionDivider() {
-  return <div className="h-px bg-gradient-to-r from-transparent via-[#38BDF8]/20 to-transparent" />
+  return <div className="h-px bg-gradient-to-r from-transparent via-[#38BDF8]/20 to-transparent max-w-4xl mx-auto" />
 }

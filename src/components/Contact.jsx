@@ -115,7 +115,7 @@ export default function Contact() {
                 <motion.div
                   variants={{ hidden: reduce ? { opacity: 1 } : { opacity: 0, x: 50 }, visible: { opacity: 1, x: 0, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } } }}
                   whileHover={reduce ? {} : { y: -6, boxShadow: '0 12px 30px rgba(10,10,10,0.10)' }}
-                  className="group flex items-start gap-4 p-5 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-xl bg-[#F5F5F5] dark:bg-[#1A1A1A]">
+                  className="group flex items-start gap-4 p-5 rounded-xl border border-[#E5E5E5] bg-[#F5F5F5] dark:bg-white/5 dark:backdrop-blur-sm dark:border-white/10">
                   <motion.div whileHover={reduce ? {} : { scale: 1.15 }} className="w-10 h-10 rounded-lg bg-[#0A0A0A] dark:bg-white flex items-center justify-center flex-shrink-0">
                     <Icon size={16} className="text-white dark:text-[#0A0A0A]" />
                   </motion.div>
@@ -131,7 +131,10 @@ export default function Contact() {
             })}
 
             {/* Carte stylisée Ambam */}
-            <div className="rounded-xl h-48 border border-[#E5E5E5] dark:border-[#2A2A2A] bg-[#0F172A] relative overflow-hidden flex items-center justify-center">
+            <motion.div
+              whileHover={reduce ? {} : { scale: 1.02 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+              className="rounded-xl h-48 border border-[#E5E5E5] dark:border-[#2A2A2A] bg-[#0F172A] relative overflow-hidden flex items-center justify-center">
               <svg className="absolute inset-0 w-full h-full opacity-[0.07]" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                   <pattern id="contact-grid" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse">
@@ -144,9 +147,9 @@ export default function Contact() {
                 <div className="text-3xl mb-2">📍</div>
                 <p className="text-white font-bold text-sm">Ambam</p>
                 <p className="text-white/40 text-xs">Région du Sud · Cameroun</p>
-                <p className="text-[#38BDF8] text-xs mt-2 font-mono">3.0085° N, 11.2617° E</p>
+                <p className="text-[#38BDF8] text-xs mt-2 font-mono">2.3833° N, 11.2500° E</p>
               </div>
-            </div>
+            </motion.div>
           </motion.div>
         </div>
       </div>

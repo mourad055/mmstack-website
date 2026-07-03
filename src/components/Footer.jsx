@@ -130,7 +130,7 @@ export default function Footer({ dark, setDark }) {
                   <li key={l.label}>
                     <a href={l.href} target={l.href.startsWith('http') ? '_blank' : undefined}
                       rel={l.href.startsWith('http') ? 'noreferrer' : undefined}
-                      className="text-sm text-white/35 hover:text-white transition-colors duration-200">
+                      className="link-underline inline-block text-sm text-white/35 hover:text-white transition-colors duration-200">
                       {l.label}
                     </a>
                   </li>
@@ -176,9 +176,14 @@ export default function Footer({ dark, setDark }) {
 
         {/* Bottom copyright */}
         <div className="py-6 text-center">
-          <p className="text-white/25 text-xs">
-            © 2026 MMstack · Fait avec ❤️ depuis{' '}
-            <span className="text-white/40">Ambam, Cameroun 🇨🇲</span>
+          <p className="text-white/25 text-xs">© 2026 MMstack · Tous droits réservés</p>
+          <p className="text-white/40 text-xs mt-3 flex items-center justify-center gap-1.5">
+            Built with
+            <motion.span
+              animate={reduce ? {} : { scale: [1, 1.2, 1] }}
+              transition={{ repeat: Infinity, duration: 2 }}
+              className="text-red-500">❤️</motion.span>
+            from 🇨🇲 Cameroon
           </p>
         </div>
 
