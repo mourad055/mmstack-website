@@ -10,3 +10,6 @@ dist
 
 # Sources vidéo brutes (assets de travail, hors build)
 mmstack-video-asset/
+
+# Sources images brutes (copiées dans public/ au besoin)
+mmstack-content-images/

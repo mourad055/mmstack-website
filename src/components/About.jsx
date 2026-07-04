@@ -14,8 +14,6 @@ const pillars = [
   { title: 'Expertise technique', desc: 'Formation en génie informatique, spécialisations en développement fullstack, cybersécurité et systèmes logistiques intelligents.' },
 ]
 
-const TERMINAL = 'const équipe = ["Ambam", "Cameroun"]'
-
 /* Icône valeur avec cercle qui se dessine au scroll */
 function ValueIcon({ Icon }) {
   const ref = useRef(null)
@@ -33,44 +31,6 @@ function ValueIcon({ Icon }) {
       </svg>
       <div className="absolute inset-0 flex items-center justify-center">
         <Icon size={17} className="text-[#0A0A0A] dark:text-white" />
-      </div>
-    </div>
-  )
-}
-
-/* Bloc terminal — typewriter caractère par caractère */
-function TeamTerminal() {
-  const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-60px' })
-  const reduce = useReducedMotion()
-  const container = { hidden: {}, visible: { transition: { staggerChildren: reduce ? 0 : 0.035 } } }
-  const char = { hidden: { opacity: 0 }, visible: { opacity: 1 } }
-
-  return (
-    <div ref={ref} className="rounded-xl overflow-hidden h-52 mt-2 bg-[#0F172A] flex items-center justify-center relative">
-      <svg className="absolute inset-0 w-full h-full opacity-[0.08]" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <pattern id="about-dots" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-            <circle cx="1" cy="1" r="1" fill="white" />
-          </pattern>
-        </defs>
-        <rect width="100%" height="100%" fill="url(#about-dots)" />
-      </svg>
-      <div className="relative z-10 text-center px-6">
-        <p className="text-white/50 font-mono text-xs tracking-widest uppercase mb-3">L'équipe MMstack</p>
-        <motion.p
-          variants={container} initial="hidden" animate={inView ? 'visible' : 'hidden'}
-          className="font-mono text-sm text-[#38BDF8]">
-          {TERMINAL.split('').map((c, i) => (
-            <motion.span key={i} variants={char}>{c}</motion.span>
-          ))}
-          {!reduce && (
-            <motion.span
-              animate={{ opacity: [1, 0, 1] }} transition={{ duration: 1, repeat: Infinity }}
-              className="inline-block w-2 h-4 bg-[#38BDF8] ml-0.5 align-middle" />
-          )}
-        </motion.p>
-        <p className="text-white/40 text-xs mt-3 tracking-widest">Ambam · Cameroun 🇨🇲</p>
       </div>
     </div>
   )
@@ -129,7 +89,23 @@ export default function About() {
                 </div>
               </MouseTiltWrapper>
             ))}
-            <TeamTerminal />
+            {/* Photo d'équipe authentique */}
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7 }}
+              className="relative rounded-2xl overflow-hidden mt-6 border border-[#E5E5E5] dark:border-[#2A2A2A]">
+              <img
+                src="/team-mmstack.jpg"
+                alt="L'équipe MMstack à Ambam, Cameroun"
+                loading="lazy"
+                className="w-full h-auto object-cover" />
+              <div className="absolute bottom-0 left-0 right-0 p-5 bg-gradient-to-t from-black/70 to-transparent">
+                <p className="text-white font-semibold text-sm">L'équipe MMstack</p>
+                <p className="text-white/70 text-xs mt-0.5">Ambam, Cameroun 🇨🇲</p>
+              </div>
+            </motion.div>
           </motion.div>
 
         </div>

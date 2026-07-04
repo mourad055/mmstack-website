@@ -48,25 +48,25 @@ const services = [
     icon: Code2, title: 'Développement logiciel',
     desc: 'Applications sur mesure pour résoudre vos problèmes spécifiques — web, mobile et desktop. Du concept au déploiement, on construit des produits qui tiennent la charge.',
     Pattern: DotGrid, patternId: 'svc-dots', badge: 'Full-stack', badgeColor: '#38BDF8',
-    span: 'md:col-span-2 md:row-span-2', big: true,
+    photo: '/dev-logiciel.jpg', span: 'md:col-span-2 md:row-span-2', big: true,
   },
   {
     icon: Globe, title: 'Création de sites web',
     desc: 'Sites vitrine modernes, rapides et optimisés SEO.',
     Pattern: ScanLines, patternId: 'svc-lines', badge: 'React · WordPress', badgeColor: '#34D399',
-    span: 'md:col-span-1',
+    photo: '/sites-web.jpg', span: 'md:col-span-1',
   },
   {
     icon: HardDrive, title: 'Installation & config',
     desc: 'Logiciels pro, OS et environnements de travail.',
     Pattern: GridLines, patternId: 'svc-grid', badge: 'Windows · Linux · macOS', badgeColor: '#A78BFA',
-    span: 'md:col-span-1',
+    photo: '/configuration-installation.jpg', span: 'md:col-span-1',
   },
   {
     icon: Lightbulb, title: 'Conseil IT',
     desc: 'Audit de vos besoins numériques et accompagnement dans votre transformation digitale — une stratégie claire, des priorités concrètes.',
     Pattern: Hexagons, patternId: 'svc-hex', badge: 'Audit · Stratégie', badgeColor: '#34D399',
-    span: 'md:col-span-3',
+    photo: '/conseil-it.jpg', span: 'md:col-span-3',
   },
 ]
 
@@ -98,20 +98,37 @@ export default function Services() {
             return (
               <motion.div key={s.title} variants={cardVar(s.big)} className={s.span}>
                 <SpotlightCard className="h-full overflow-hidden rounded-xl border border-[#E5E5E5] dark:border-[#2A2A2A] bg-[#F5F5F5] dark:bg-[#1A1A1A] hover:-translate-y-1 transition-transform duration-300">
-                  {/* Visual block */}
-                  <div className={`relative ${s.big ? 'h-56' : 'h-44'} bg-[#0F172A] flex flex-col items-center justify-center overflow-hidden`}>
-                    <s.Pattern id={s.patternId} />
-                    <motion.div
-                      whileHover={reduce ? {} : { rotate: 12, scale: 1.1 }}
-                      transition={{ type: 'spring', stiffness: 300, damping: 18 }}
-                      className={`relative z-10 ${s.big ? 'w-20 h-20' : 'w-16 h-16'} rounded-2xl bg-white/10 backdrop-blur flex items-center justify-center border border-white/10`}>
-                      <Icon size={s.big ? 38 : 30} className="text-white" />
-                    </motion.div>
-                    <span className="relative z-10 mt-3 text-[10px] font-semibold px-2.5 py-0.5 rounded-full"
-                      style={{ color: s.badgeColor, backgroundColor: s.badgeColor + '1A' }}>
-                      {s.badge}
-                    </span>
-                  </div>
+                  {s.photo ? (
+                    /* Visual block — vraie photo */
+                    <div className={`relative ${s.big ? 'h-64 md:h-72' : 'h-44 md:h-48'} overflow-hidden`}>
+                      <img
+                        src={s.photo}
+                        alt={`${s.title} — MMstack`}
+                        loading="lazy"
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A]/70 via-[#0F172A]/10 to-transparent" />
+                      <span
+                        className="absolute bottom-3 left-3 text-[10px] font-semibold px-2.5 py-1 rounded-full backdrop-blur-sm"
+                        style={{ color: s.badgeColor, backgroundColor: s.badgeColor + '26', border: `1px solid ${s.badgeColor}33` }}>
+                        {s.badge}
+                      </span>
+                    </div>
+                  ) : (
+                    /* Visual block — fallback stylisé (icône + pattern) */
+                    <div className={`relative ${s.big ? 'h-56' : 'h-44'} bg-[#0F172A] flex flex-col items-center justify-center overflow-hidden`}>
+                      <s.Pattern id={s.patternId} />
+                      <motion.div
+                        whileHover={reduce ? {} : { rotate: 12, scale: 1.1 }}
+                        transition={{ type: 'spring', stiffness: 300, damping: 18 }}
+                        className={`relative z-10 ${s.big ? 'w-20 h-20' : 'w-16 h-16'} rounded-2xl bg-white/10 backdrop-blur flex items-center justify-center border border-white/10`}>
+                        <Icon size={s.big ? 38 : 30} className="text-white" />
+                      </motion.div>
+                      <span className="relative z-10 mt-3 text-[10px] font-semibold px-2.5 py-0.5 rounded-full"
+                        style={{ color: s.badgeColor, backgroundColor: s.badgeColor + '1A' }}>
+                        {s.badge}
+                      </span>
+                    </div>
+                  )}
 
                   <div className={s.big ? 'p-8' : 'p-7'}>
                     <h3 className={`font-bold text-[#0A0A0A] dark:text-white mb-2 ${s.big ? 'text-2xl' : 'text-lg'}`}>{s.title}</h3>
