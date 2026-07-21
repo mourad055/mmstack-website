@@ -1,5 +1,5 @@
 import { motion, useReducedMotion } from 'framer-motion'
-import { Code2, Globe, HardDrive, Lightbulb } from 'lucide-react'
+import { Code2, Globe, HardDrive, Lightbulb, ArrowRight } from 'lucide-react'
 import { SpotlightCard } from '../utils/premium'
 
 const DotGrid = ({ id }) => (
@@ -46,29 +46,37 @@ const Hexagons = ({ id }) => (
 const services = [
   {
     icon: Code2, title: 'Développement logiciel',
+    contactService: 'Développement logiciel',
     desc: 'Applications sur mesure pour résoudre vos problèmes spécifiques — web, mobile et desktop. Du concept au déploiement, on construit des produits qui tiennent la charge.',
     Pattern: DotGrid, patternId: 'svc-dots', badge: 'Full-stack', badgeColor: '#38BDF8',
     photo: '/dev-logiciel.jpg', span: 'md:col-span-2 md:row-span-2', big: true,
   },
   {
     icon: Globe, title: 'Création de sites web',
+    contactService: 'Création de site web',
     desc: 'Sites vitrine modernes, rapides et optimisés SEO.',
     Pattern: ScanLines, patternId: 'svc-lines', badge: 'React · WordPress', badgeColor: '#34D399',
     photo: '/sites-web.jpg', span: 'md:col-span-1',
   },
   {
     icon: HardDrive, title: 'Installation & config',
+    contactService: 'Installation & config',
     desc: 'Logiciels pro, OS et environnements de travail.',
     Pattern: GridLines, patternId: 'svc-grid', badge: 'Windows · Linux · macOS', badgeColor: '#A78BFA',
     photo: '/configuration-installation.jpg', span: 'md:col-span-1',
   },
   {
     icon: Lightbulb, title: 'Conseil IT',
+    contactService: 'Conseil IT',
     desc: 'Audit de vos besoins numériques et accompagnement dans votre transformation digitale — une stratégie claire, des priorités concrètes.',
     Pattern: Hexagons, patternId: 'svc-hex', badge: 'Audit · Stratégie', badgeColor: '#34D399',
     photo: '/conseil-it.jpg', span: 'md:col-span-3',
   },
 ]
+
+function contactHref(service) {
+  return `?service=${encodeURIComponent(service)}#contact`
+}
 
 export default function Services() {
   const reduce = useReducedMotion()
@@ -82,11 +90,10 @@ export default function Services() {
   })
 
   return (
-    <section id="services" className="section-pad bg-white dark:bg-[#0A0A0A]">
+    <section id="services" className="section-pad bg-[#0A0A0A] border-b border-[#2A2A2A]/50">
       <div className="container-xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
-          <div className="text-xs font-semibold tracking-widest text-[#8A8A8A] uppercase mb-3">Ce qu'on fait</div>
-          <h2 className="section-title">Nos <span className="text-gradient">services</span></h2>
+          <h2 className="section-title">Nos services</h2>
           <p className="section-sub mb-14">Des solutions digitales pensées pour le contexte camerounais et africain.</p>
         </motion.div>
 
@@ -97,9 +104,8 @@ export default function Services() {
             const Icon = s.icon
             return (
               <motion.div key={s.title} variants={cardVar(s.big)} className={s.span}>
-                <SpotlightCard className="h-full overflow-hidden rounded-xl border border-[#E5E5E5] dark:border-[#2A2A2A] bg-[#F5F5F5] dark:bg-[#1A1A1A] hover:-translate-y-1 transition-transform duration-300">
+                <SpotlightCard className="h-full flex flex-col overflow-hidden rounded-xl border border-[#2A2A2A] bg-[#1A1A1A] hover:-translate-y-1 transition-transform duration-300">
                   {s.photo ? (
-                    /* Visual block — vraie photo */
                     <div className={`relative ${s.big ? 'h-64 md:h-72' : 'h-44 md:h-48'} overflow-hidden`}>
                       <img
                         src={s.photo}
@@ -114,7 +120,6 @@ export default function Services() {
                       </span>
                     </div>
                   ) : (
-                    /* Visual block — fallback stylisé (icône + pattern) */
                     <div className={`relative ${s.big ? 'h-56' : 'h-44'} bg-[#0F172A] flex flex-col items-center justify-center overflow-hidden`}>
                       <s.Pattern id={s.patternId} />
                       <motion.div
@@ -130,9 +135,15 @@ export default function Services() {
                     </div>
                   )}
 
-                  <div className={s.big ? 'p-8' : 'p-7'}>
-                    <h3 className={`font-bold text-[#0A0A0A] dark:text-white mb-2 ${s.big ? 'text-2xl' : 'text-lg'}`}>{s.title}</h3>
-                    <p className={`text-[#8A8A8A] leading-relaxed ${s.big ? 'text-base max-w-md' : 'text-sm'}`}>{s.desc}</p>
+                  <div className={`flex flex-col flex-1 ${s.big ? 'p-8' : 'p-7'}`}>
+                    <h3 className={`font-bold text-white mb-2 ${s.big ? 'text-2xl' : 'text-lg'}`}>{s.title}</h3>
+                    <p className={`text-[#A0A0A0] leading-relaxed flex-1 ${s.big ? 'text-base max-w-md' : 'text-sm'}`}>{s.desc}</p>
+                    <a
+                      href={contactHref(s.contactService)}
+                      className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-[#38BDF8] hover:text-white transition-colors group/link">
+                      Demander un devis
+                      <ArrowRight size={14} className="transition-transform group-hover/link:translate-x-0.5" />
+                    </a>
                   </div>
                 </SpotlightCard>
               </motion.div>

@@ -4,15 +4,18 @@ import { useDarkMode } from './hooks/useDarkMode'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import Services from './components/Services'
+import Process from './components/Process'
 import TechStack from './components/TechStack'
+import Projects from './components/Projects'
 import About from './components/About'
 import Testimonials from './components/Testimonials'
+import FAQ from './components/FAQ'
+import CTABanner from './components/CTABanner'
 import Contact from './components/Contact'
 import Footer, { BackToTop } from './components/Footer'
 import WhatsAppButton from './components/WhatsAppButton'
-import { ScrollProgress, CursorGlow, SectionDivider } from './utils/premium'
+import { ScrollProgress } from './utils/premium'
 
-/* Séquence d'intro — logo cygne qui se forme puis file vers la navbar */
 function IntroOverlay() {
   return (
     <motion.div
@@ -36,7 +39,7 @@ function IntroOverlay() {
 }
 
 export default function App() {
-  const [dark, setDark] = useDarkMode()
+  useDarkMode()
   const reduce = useReducedMotion()
   const [showIntro, setShowIntro] = useState(true)
 
@@ -48,24 +51,23 @@ export default function App() {
   return (
     <div className="min-h-screen">
       <ScrollProgress />
-      <CursorGlow />
 
       <AnimatePresence>{showIntro && <IntroOverlay key="intro" />}</AnimatePresence>
 
-      <Navbar dark={dark} setDark={setDark} />
+      <Navbar />
       <main className="relative z-10">
         <Hero introDone={!showIntro} />
         <Services />
-        <SectionDivider />
+        <Process />
         <TechStack />
-        <SectionDivider />
+        <Projects />
         <About />
-        <SectionDivider />
         <Testimonials />
-        <SectionDivider />
+        <FAQ />
+        <CTABanner />
         <Contact />
       </main>
-      <Footer dark={dark} setDark={setDark} />
+      <Footer />
       <BackToTop />
       <WhatsAppButton />
     </div>

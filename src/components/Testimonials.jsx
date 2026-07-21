@@ -1,5 +1,11 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
+
+const clients = [
+  'Hôtel Central Ambam',
+  'ESTLC Ébolowa',
+  "Lycée technique d'Ambam",
+]
 
 const testimonials = [
   {
@@ -7,11 +13,11 @@ const testimonials = [
     name: 'Rodrigue Ateba', role: 'Gérant, Hôtel Central Ambam',
   },
   {
-    quote: "DocForge m'a sauvé la mise pour mes rapports de stage. Plus besoin de passer des heures sur Word — tout est formaté automatiquement aux normes de l'école.",
+    quote: "L'équipe a développé une application web adaptée à nos contraintes de connexion. Interface claire, livraison dans les délais — exactement ce qu'il nous fallait.",
     name: 'Chanceline Mendo', role: 'Étudiante, ESTLC Ébolowa',
   },
   {
-    quote: "Formation informatique très pratique et adaptée. L'équipe connaît vraiment son sujet et sait l'expliquer à des non-techniciens.",
+    quote: "Conseil IT concret et sans jargon. MMstack nous a aidés à structurer notre infrastructure numérique avec un budget maîtrisé.",
     name: 'Pastor Emmanuel Nkoa', role: "Directeur, Lycée technique d'Ambam",
   },
 ]
@@ -40,62 +46,73 @@ function RingAvatar({ name, idx }) {
 
 export default function Testimonials() {
   const [index, setIndex] = useState(0)
+  const [paused, setPaused] = useState(false)
   const reduce = useReducedMotion()
+  const sectionRef = useRef(null)
 
   const next = useCallback(() => setIndex((i) => (i + 1) % testimonials.length), [])
 
   useEffect(() => {
-    const t = setInterval(next, 5000)
+    if (paused) return
+    const t = setInterval(next, 6000)
     return () => clearInterval(t)
-  }, [next])
+  }, [next, paused])
 
   const t = testimonials[index]
 
   return (
-    <section className="section-pad bg-white dark:bg-[#0A0A0A]">
+    <section id="testimonials" ref={sectionRef} className="section-pad bg-[#0D0D0D] border-b border-[#2A2A2A]/50">
       <div className="container-xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          <div className="text-xs font-semibold tracking-widest text-[#8A8A8A] uppercase mb-3">Témoignages</div>
           <h2 className="section-title">Ce que disent nos clients</h2>
-          <p className="section-sub mb-14">Des vraies personnes, de vrais résultats.</p>
+          <p className="section-sub mb-8">Des vraies personnes, de vrais résultats.</p>
         </motion.div>
 
-        <div className="relative max-w-3xl mx-auto">
-          <div className="min-h-[280px] md:min-h-[240px] flex items-center">
+        {/* Bandeau confiance */}
+        <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 mb-12 text-sm text-[#A0A0A0]">
+          {clients.map((c, i) => (
+            <span key={c} className="flex items-center gap-6">
+              {i > 0 && <span className="hidden sm:inline text-[#2A2A2A]" aria-hidden>·</span>}
+              <span>{c}</span>
+            </span>
+          ))}
+        </div>
+
+        <div
+          className="relative max-w-3xl mx-auto"
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
+          onFocus={() => setPaused(true)}
+          onBlur={() => setPaused(false)}>
+          <div className="min-h-[280px] md:min-h-[220px] flex items-center">
             <AnimatePresence mode="wait">
               <motion.div
                 key={index}
-                initial={reduce ? { opacity: 0 } : { opacity: 0, x: 100 }}
+                initial={reduce ? { opacity: 0 } : { opacity: 0, x: 40 }}
                 animate={{ opacity: 1, x: 0 }}
-                exit={reduce ? { opacity: 0 } : { opacity: 0, x: -100 }}
-                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                exit={reduce ? { opacity: 0 } : { opacity: 0, x: -40 }}
+                transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
                 className="w-full card">
-                <motion.div
-                  initial={{ scale: 0.3, rotate: -20, opacity: 0 }}
-                  animate={{ scale: 1, rotate: 0, opacity: 1 }}
-                  transition={{ type: 'spring', stiffness: 200, damping: 15 }}
-                  className="text-6xl leading-none text-[#38BDF8]/30 font-serif mb-2">"</motion.div>
-                <p className="text-[#0A0A0A] dark:text-[#F5F5F5] text-lg leading-relaxed mb-8">{t.quote}</p>
-                <div className="flex items-center gap-3 pt-5 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
+                <p className="text-[#F5F5F5] text-lg leading-relaxed mb-8">{t.quote}</p>
+                <div className="flex items-center gap-3 pt-5 border-t border-[#2A2A2A]">
                   <RingAvatar name={t.name} idx={index} />
                   <div>
-                    <div className="font-semibold text-[#0A0A0A] dark:text-white text-sm">{t.name}</div>
-                    <div className="text-[#8A8A8A] text-xs">{t.role}</div>
+                    <div className="font-semibold text-white text-sm">{t.name}</div>
+                    <div className="text-[#A0A0A0] text-xs">{t.role}</div>
                   </div>
                 </div>
               </motion.div>
             </AnimatePresence>
           </div>
 
-          {/* Dots */}
           <div className="flex items-center justify-center gap-2.5 mt-8">
             {testimonials.map((_, i) => (
               <button
                 key={i}
                 onClick={() => setIndex(i)}
                 aria-label={`Témoignage ${i + 1}`}
-                className="p-2 -m-1"
-              >
+                aria-current={i === index ? 'true' : undefined}
+                className="p-2 -m-1">
                 <motion.span
                   className="block rounded-full"
                   animate={{

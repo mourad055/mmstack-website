@@ -15,10 +15,10 @@ export default function TechStack() {
   }
 
   return (
-    <section className="py-20 md:py-24 px-6 md:px-12 lg:px-20 bg-[#F5F5F5]/60 dark:bg-[#0D0D0D]">
+    <section className="py-20 md:py-24 px-6 md:px-12 lg:px-20 bg-[#0A0A0A] border-b border-[#2A2A2A]/50">
       <div className="container-xl mx-auto text-center">
         <ScrollReveal>
-          <h2 className="text-2xl md:text-3xl font-extrabold text-[#0A0A0A] dark:text-white tracking-[-0.02em] mb-10">
+          <h2 className="text-2xl md:text-3xl font-extrabold text-white tracking-[-0.02em] mb-10">
             Technologies que nous maîtrisons
           </h2>
         </ScrollReveal>
@@ -31,7 +31,7 @@ export default function TechStack() {
               key={t}
               variants={item}
               whileHover={reduce ? {} : { scale: 1.08 }}
-              className="rounded-lg border border-[#E5E5E5] dark:border-[#2A2A2A] bg-white dark:bg-[#1A1A1A] px-4 py-2 text-sm font-mono text-[#475569] dark:text-[#A0A0A0] hover:border-[#38BDF8] hover:text-[#38BDF8] dark:hover:text-[#38BDF8] transition-colors duration-200 cursor-default">
+              className="rounded-lg border border-[#2A2A2A] bg-[#1A1A1A] px-4 py-2 text-sm font-mono text-[#A0A0A0] hover:border-[#38BDF8] hover:text-[#38BDF8] transition-colors duration-200 cursor-default">
               {t}
             </motion.span>
           ))}
