@@ -1,29 +1,27 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
-import { useDarkMode } from './hooks/useDarkMode'
+import { useTheme } from './hooks/useDarkMode.jsx'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
-import Services from './components/Services'
+import ShowcaseSpine from './components/ShowcaseSpine'
 import Process from './components/Process'
-import TechStack from './components/TechStack'
 import Projects from './components/Projects'
 import About from './components/About'
-import Testimonials from './components/Testimonials'
 import FAQ from './components/FAQ'
 import CTABanner from './components/CTABanner'
-import Contact from './components/Contact'
 import Footer, { BackToTop } from './components/Footer'
 import WhatsAppButton from './components/WhatsAppButton'
 import { ScrollProgress } from './utils/premium'
 
 function IntroOverlay() {
+  const { theme } = useTheme()
   return (
     <motion.div
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-[#0A0A0A]"
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-white dark:bg-[#0A0A0A]"
       initial={{ opacity: 1 }}
       exit={{ opacity: 0, transition: { duration: 0.5 } }}>
       <motion.img
-        src="/logo-icon-light.png"
+        src={theme === 'dark' ? '/logo-icon-light.png' : '/logo-icon-dark.png'}
         alt="MMstack"
         className="h-28 w-auto object-contain"
         initial={{ scale: 0.3, opacity: 0, filter: 'blur(20px)' }}
@@ -39,7 +37,6 @@ function IntroOverlay() {
 }
 
 export default function App() {
-  useDarkMode()
   const reduce = useReducedMotion()
   const [showIntro, setShowIntro] = useState(true)
 
@@ -57,15 +54,12 @@ export default function App() {
       <Navbar />
       <main className="relative z-10">
         <Hero introDone={!showIntro} />
-        <Services />
+        <ShowcaseSpine />
         <Process />
-        <TechStack />
         <Projects />
         <About />
-        <Testimonials />
         <FAQ />
         <CTABanner />
-        <Contact />
       </main>
       <Footer />
       <BackToTop />

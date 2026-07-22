@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
+import { useTheme } from '../hooks/useDarkMode.jsx'
 
 const clients = [
   'Hôtel Central Ambam',
@@ -22,12 +23,14 @@ const testimonials = [
   },
 ]
 
-const PALETTES = [['#0F172A', '#38BDF8'], ['#0C1A12', '#34D399'], ['#1E1B4B', '#A78BFA']]
+const PALETTES_DARK = [['#0F172A', '#38BDF8'], ['#0C1A12', '#34D399'], ['#1E1B4B', '#A78BFA']]
+const PALETTES_LIGHT = [['#E0F2FE', '#0284C7'], ['#D1FAE5', '#059669'], ['#EDE9FE', '#7C3AED']]
 
-function RingAvatar({ name, idx }) {
+function RingAvatar({ name, idx, theme }) {
   const reduce = useReducedMotion()
   const initials = name.split(' ').map((n) => n[0]).join('').slice(0, 2).toUpperCase()
-  const [bg, fg] = PALETTES[idx % PALETTES.length]
+  const palettes = theme === 'dark' ? PALETTES_DARK : PALETTES_LIGHT
+  const [bg, fg] = palettes[idx % palettes.length]
   return (
     <div className="relative w-12 h-12 flex-shrink-0">
       <motion.div
@@ -49,6 +52,7 @@ export default function Testimonials() {
   const [paused, setPaused] = useState(false)
   const reduce = useReducedMotion()
   const sectionRef = useRef(null)
+  const { theme } = useTheme()
 
   const next = useCallback(() => setIndex((i) => (i + 1) % testimonials.length), [])
 
@@ -61,29 +65,38 @@ export default function Testimonials() {
   const t = testimonials[index]
 
   return (
-    <section id="testimonials" ref={sectionRef} className="section-pad bg-[#0D0D0D] border-b border-[#2A2A2A]/50">
-      <div className="container-xl mx-auto">
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          <h2 className="section-title">Ce que disent nos clients</h2>
-          <p className="section-sub mb-8">Des vraies personnes, de vrais résultats.</p>
-        </motion.div>
+    <div id="testimonials" ref={sectionRef} className="scroll-mt-24">
+      <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+        <h2 className="section-title">Ce que disent nos clients</h2>
+        <p className="section-sub mb-8">Des vraies personnes, de vrais résultats.</p>
+      </motion.div>
 
-        {/* Bandeau confiance */}
-        <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 mb-12 text-sm text-[#A0A0A0]">
-          {clients.map((c, i) => (
-            <span key={c} className="flex items-center gap-6">
-              {i > 0 && <span className="hidden sm:inline text-[#2A2A2A]" aria-hidden>·</span>}
-              <span>{c}</span>
-            </span>
-          ))}
-        </div>
+      {/* Bandeau confiance — chaque nom de client apparaît en fondu à son tour */}
+      <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 mb-12 text-sm text-[#6B6B6B] dark:text-[#A0A0A0]">
+        {clients.map((c, i) => (
+          <motion.span
+            key={c}
+            initial={reduce ? { opacity: 1 } : { opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-40px' }}
+            transition={{ duration: 0.5, delay: reduce ? 0 : i * 0.08, ease: [0.16, 1, 0.3, 1] }}
+            className="flex items-center gap-6">
+            {i > 0 && <span className="hidden sm:inline text-[#E5E5E5] dark:text-[#2A2A2A]" aria-hidden>·</span>}
+            <span>{c}</span>
+          </motion.span>
+        ))}
+      </div>
 
-        <div
-          className="relative max-w-3xl mx-auto"
-          onMouseEnter={() => setPaused(true)}
-          onMouseLeave={() => setPaused(false)}
-          onFocus={() => setPaused(true)}
-          onBlur={() => setPaused(false)}>
+      <motion.div
+        initial={reduce ? { opacity: 1 } : { opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-60px' }}
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        className="relative"
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+        onFocus={() => setPaused(true)}
+        onBlur={() => setPaused(false)}>
           <div className="min-h-[280px] md:min-h-[220px] flex items-center">
             <AnimatePresence mode="wait">
               <motion.div
@@ -93,12 +106,12 @@ export default function Testimonials() {
                 exit={reduce ? { opacity: 0 } : { opacity: 0, x: -40 }}
                 transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
                 className="w-full card">
-                <p className="text-[#F5F5F5] text-lg leading-relaxed mb-8">{t.quote}</p>
-                <div className="flex items-center gap-3 pt-5 border-t border-[#2A2A2A]">
-                  <RingAvatar name={t.name} idx={index} />
+                <p className="text-[#0A0A0A] dark:text-[#F5F5F5] text-lg leading-relaxed mb-8">{t.quote}</p>
+                <div className="flex items-center gap-3 pt-5 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
+                  <RingAvatar name={t.name} idx={index} theme={theme} />
                   <div>
-                    <div className="font-semibold text-white text-sm">{t.name}</div>
-                    <div className="text-[#A0A0A0] text-xs">{t.role}</div>
+                    <div className="font-semibold text-[#0A0A0A] dark:text-white text-sm">{t.name}</div>
+                    <div className="text-[#6B6B6B] dark:text-[#A0A0A0] text-xs">{t.role}</div>
                   </div>
                 </div>
               </motion.div>
@@ -123,9 +136,8 @@ export default function Testimonials() {
                   style={{ height: 8 }} />
               </button>
             ))}
-          </div>
         </div>
-      </div>
-    </section>
+      </motion.div>
+    </div>
   )
 }

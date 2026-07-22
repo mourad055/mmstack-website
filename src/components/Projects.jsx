@@ -31,14 +31,24 @@ const projects = [
     icon: '🚕',
   },
   {
-    title: 'DocForge',
+    title: 'Lexis',
     category: 'Outil SaaS',
-    desc: 'Générateur automatique de rapports de stage aux normes ESTLC — export PDF en un clic.',
+    desc: 'Générateur automatique de rapports de stage aux normes ESTLC — export PDF en un clic. Anciennement DocForge.',
     result: 'Adopté par des étudiants',
     stack: ['FastAPI', 'React', 'LaTeX'],
     accent: '#A78BFA',
     visual: null,
     icon: '📄',
+  },
+  {
+    title: 'Scolia',
+    category: 'Outil SaaS',
+    desc: "Génération automatisée de cartes scolaires pour établissements — mise en page, photos et export en lot.",
+    result: 'En déploiement',
+    stack: ['React', 'Node.js', 'PDF'],
+    accent: '#38BDF8',
+    visual: null,
+    icon: '🪪',
   },
 ]
 
@@ -58,9 +68,7 @@ function ProjectVisual({ project }) {
   }
 
   return (
-    <div
-      className="relative h-44 flex items-center justify-center overflow-hidden"
-      style={{ backgroundColor: '#0F172A' }}>
+    <div className="relative h-44 flex items-center justify-center overflow-hidden bg-[#EFF6FF] dark:bg-[#0F172A]">
       <div
         className="absolute inset-0 opacity-20"
         style={{ background: `radial-gradient(circle at 30% 50%, ${project.accent}, transparent 60%)` }}
@@ -79,7 +87,7 @@ export default function Projects() {
   }
 
   return (
-    <section id="projects" className="section-pad bg-[#0D0D0D] border-b border-[#2A2A2A]/50">
+    <section id="projects" className="section-pad bg-white dark:bg-[#0D0D0D] border-b border-[#E5E5E5]/70 dark:border-[#2A2A2A]/50">
       <div className="container-xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -108,7 +116,7 @@ export default function Projects() {
             <motion.article
               key={p.title}
               variants={item}
-              className="group flex flex-col overflow-hidden rounded-xl border border-[#2A2A2A] bg-[#1A1A1A] hover:border-[#38BDF8]/30 transition-colors duration-300">
+              className="group flex flex-col overflow-hidden rounded-xl border border-[#E5E5E5] dark:border-[#2A2A2A] bg-[#F5F5F5] dark:bg-[#1A1A1A] hover:border-[#38BDF8]/50 dark:hover:border-[#38BDF8]/30 transition-colors duration-300">
               <ProjectVisual project={p} />
 
               <div className="flex flex-col flex-1 p-6">
@@ -117,18 +125,18 @@ export default function Projects() {
                     <p className="text-xs font-semibold uppercase tracking-wider mb-1" style={{ color: p.accent }}>
                       {p.category}
                     </p>
-                    <h3 className="font-bold text-white text-lg">{p.title}</h3>
+                    <h3 className="font-bold text-[#0A0A0A] dark:text-white text-lg">{p.title}</h3>
                   </div>
-                  <span className="shrink-0 text-[10px] font-mono text-[#A0A0A0] bg-[#0A0A0A] border border-[#2A2A2A] px-2 py-1 rounded-full">
+                  <span className="shrink-0 text-[10px] font-mono text-[#6B6B6B] dark:text-[#A0A0A0] bg-white dark:bg-[#0A0A0A] border border-[#E5E5E5] dark:border-[#2A2A2A] px-2 py-1 rounded-full">
                     {p.result}
                   </span>
                 </div>
 
-                <p className="text-[#A0A0A0] text-sm leading-relaxed flex-1">{p.desc}</p>
+                <p className="text-[#6B6B6B] dark:text-[#A0A0A0] text-sm leading-relaxed flex-1">{p.desc}</p>
 
                 <div className="flex flex-wrap gap-2 mt-4 mb-5">
                   {p.stack.map((t) => (
-                    <span key={t} className="text-[11px] font-mono text-[#A0A0A0] border border-[#2A2A2A] px-2 py-0.5 rounded">
+                    <span key={t} className="text-[11px] font-mono text-[#6B6B6B] dark:text-[#A0A0A0] border border-[#E5E5E5] dark:border-[#2A2A2A] px-2 py-0.5 rounded">
                       {t}
                     </span>
                   ))}
@@ -136,7 +144,7 @@ export default function Projects() {
 
                 <a
                   href="#contact"
-                  className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#38BDF8] hover:text-white transition-colors">
+                  className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#0284C7] dark:text-[#38BDF8] hover:text-[#0A0A0A] dark:hover:text-white transition-colors">
                   Projet similaire
                   <ArrowRight size={14} />
                 </a>

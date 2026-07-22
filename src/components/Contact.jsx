@@ -7,7 +7,7 @@ const WA = '237697074455'
 
 const SERVICE_OPTIONS = ['Développement logiciel', 'Création de site web', 'Installation & config', 'Conseil IT', 'Autre']
 
-const FIELD = 'w-full border border-[#2A2A2A] bg-[#0A0A0A] rounded-lg px-4 py-3 text-sm text-[#F5F5F5] outline-none transition-all duration-200 focus:border-[#38BDF8] focus:shadow-[0_0_0_3px_rgba(56,189,248,0.15)]'
+const FIELD = 'w-full border border-[#E5E5E5] dark:border-[#2A2A2A] bg-white dark:bg-[#0A0A0A] rounded-lg px-4 py-3 text-sm text-[#0A0A0A] dark:text-[#F5F5F5] outline-none transition-all duration-200 focus:border-[#38BDF8] focus:shadow-[0_0_0_3px_rgba(56,189,248,0.15)]'
 
 const infoCards = [
   { icon: MapPin, label: 'Adresse', value: 'Ambam, Région du Sud\nCameroun 🇨🇲' },
@@ -45,50 +45,49 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="section-pad bg-[#0A0A0A]">
-      <div className="container-xl mx-auto">
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          <h2 className="section-title">On discute de votre projet ?</h2>
-          <p className="section-sub mb-14">Réponse garantie sous 24h.</p>
-        </motion.div>
+    <div id="contact" className="scroll-mt-24">
+      <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+        <h2 className="section-title">On discute de votre projet ?</h2>
+        <p className="section-sub mb-14">Réponse garantie sous 24h.</p>
+      </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
+      <div className="flex flex-col gap-10">
           {/* Formulaire */}
-          <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="lg:col-span-3">
+          <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
             {status === 'success' ? (
               <motion.div initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }}
-                className="flex flex-col items-center justify-center py-16 gap-4 border border-[#2A2A2A] rounded-xl bg-[#1A1A1A]">
-                <div className="w-16 h-16 rounded-full bg-[#38BDF8]/10 flex items-center justify-center text-[#38BDF8]">
+                className="flex flex-col items-center justify-center py-16 gap-4 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-xl bg-[#F5F5F5] dark:bg-[#1A1A1A]">
+                <div className="w-16 h-16 rounded-full bg-[#38BDF8]/10 flex items-center justify-center text-[#0284C7] dark:text-[#38BDF8]">
                   <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
                     <motion.path d="M5 13l4 4L19 7" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
                       initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 0.5 }} />
                   </svg>
                 </div>
-                <h3 className="font-bold text-white text-xl">Message envoyé !</h3>
-                <p className="text-[#A0A0A0] text-sm">Nous vous répondrons dans les 24 heures.</p>
+                <h3 className="font-bold text-[#0A0A0A] dark:text-white text-xl">Message envoyé !</h3>
+                <p className="text-[#6B6B6B] dark:text-[#A0A0A0] text-sm">Nous vous répondrons dans les 24 heures.</p>
                 <button onClick={() => { setStatus('idle'); setForm({ name: '', email: '', service: '', message: '' }) }} className="btn-outline text-sm mt-2">Envoyer un autre message</button>
               </motion.div>
             ) : (
-              <form onSubmit={submit} className="space-y-5 border border-[#2A2A2A] rounded-xl p-8 bg-[#1A1A1A]">
+              <form onSubmit={submit} className="space-y-5 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-xl p-8 bg-[#F5F5F5] dark:bg-[#1A1A1A]">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                   <div>
-                    <label className="block text-xs font-semibold text-[#A0A0A0] uppercase tracking-wider mb-1.5">Votre nom</label>
+                    <label className="block text-xs font-semibold text-[#6B6B6B] dark:text-[#A0A0A0] uppercase tracking-wider mb-1.5">Votre nom</label>
                     <input required value={form.name} onChange={set('name')} placeholder="Jean Dupont" className={FIELD} />
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-[#A0A0A0] uppercase tracking-wider mb-1.5">Email</label>
+                    <label className="block text-xs font-semibold text-[#6B6B6B] dark:text-[#A0A0A0] uppercase tracking-wider mb-1.5">Email</label>
                     <input required type="email" value={form.email} onChange={set('email')} placeholder="jean@email.com" className={FIELD} />
                   </div>
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-[#A0A0A0] uppercase tracking-wider mb-1.5">Service souhaité</label>
+                  <label className="block text-xs font-semibold text-[#6B6B6B] dark:text-[#A0A0A0] uppercase tracking-wider mb-1.5">Service souhaité</label>
                   <select required value={form.service} onChange={set('service')} className={FIELD}>
                     <option value="">Sélectionner un service...</option>
                     {SERVICE_OPTIONS.map((s) => <option key={s} value={s}>{s}</option>)}
                   </select>
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-[#A0A0A0] uppercase tracking-wider mb-1.5">Votre message</label>
+                  <label className="block text-xs font-semibold text-[#6B6B6B] dark:text-[#A0A0A0] uppercase tracking-wider mb-1.5">Votre message</label>
                   <textarea required rows={5} value={form.message} onChange={set('message')} placeholder="Décrivez votre projet ou votre besoin..." className={`${FIELD} resize-none`} />
                 </div>
                 <motion.button type="submit" disabled={status === 'sending'}
@@ -111,24 +110,25 @@ export default function Contact() {
             )}
           </motion.div>
 
-          {/* Info cards — stagger depuis la droite */}
-          <motion.div
-            initial="hidden" whileInView="visible" viewport={{ once: true }}
-            variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.12 } } }}
-            className="lg:col-span-2 space-y-4">
+          {/* Info cards — chaque carte apparaît en fondu à son tour, dès qu'ELLE entre dans
+              le viewport (observateur individuel, pas un stagger groupé déclenché en bloc) */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {infoCards.map((c) => {
               const Icon = c.icon
               const inner = (
                 <motion.div
-                  variants={{ hidden: reduce ? { opacity: 1 } : { opacity: 0, x: 50 }, visible: { opacity: 1, x: 0, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } } }}
+                  initial={reduce ? { opacity: 1 } : { opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-60px' }}
+                  transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                   whileHover={reduce ? {} : { y: -6, boxShadow: '0 12px 30px rgba(10,10,10,0.10)' }}
-                  className="group flex items-start gap-4 p-5 rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm">
-                  <motion.div whileHover={reduce ? {} : { scale: 1.15 }} className="w-10 h-10 rounded-lg bg-white flex items-center justify-center flex-shrink-0">
-                    <Icon size={16} className="text-[#0A0A0A]" />
+                  className="group flex items-start gap-4 p-5 rounded-xl border border-[#E5E5E5] dark:border-white/10 bg-white dark:bg-white/5 backdrop-blur-sm">
+                  <motion.div whileHover={reduce ? {} : { scale: 1.15 }} className="w-10 h-10 rounded-lg bg-[#0A0A0A] dark:bg-white flex items-center justify-center flex-shrink-0">
+                    <Icon size={16} className="text-white dark:text-[#0A0A0A]" />
                   </motion.div>
                   <div>
-                    <div className="text-xs font-semibold text-[#A0A0A0] uppercase tracking-wider mb-1">{c.label}</div>
-                    <p className="text-sm text-white whitespace-pre-line group-hover:text-[#38BDF8] transition-colors">{c.value}</p>
+                    <div className="text-xs font-semibold text-[#6B6B6B] dark:text-[#A0A0A0] uppercase tracking-wider mb-1">{c.label}</div>
+                    <p className="text-sm text-[#0A0A0A] dark:text-white whitespace-pre-line group-hover:text-[#0284C7] dark:group-hover:text-[#38BDF8] transition-colors">{c.value}</p>
                   </div>
                 </motion.div>
               )
@@ -138,7 +138,12 @@ export default function Contact() {
             })}
 
             {/* Carte OpenStreetMap — Ambam */}
-            <div className="rounded-xl overflow-hidden border border-[#2A2A2A] bg-[#0F172A]">
+            <motion.div
+              initial={reduce ? { opacity: 1 } : { opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-60px' }}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              className="sm:col-span-2 rounded-xl overflow-hidden border border-[#E5E5E5] dark:border-[#2A2A2A] bg-[#EFF6FF] dark:bg-[#0F172A]">
               <iframe
                 title="Carte OpenStreetMap — Ambam, Cameroun"
                 src="https://www.openstreetmap.org/export/embed.html?bbox=11.2200%2C2.3600%2C11.2800%2C2.4100&layer=mapnik&marker=2.3833%2C11.2500"
@@ -150,14 +155,13 @@ export default function Contact() {
                 href="https://www.openstreetmap.org/?mlat=2.3833&mlon=11.2500#map=14/2.3833/11.2500"
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center justify-between px-4 py-3 text-xs text-[#A0A0A0] hover:text-[#38BDF8] border-t border-[#2A2A2A] transition-colors">
+                className="flex items-center justify-between px-4 py-3 text-xs text-[#6B6B6B] dark:text-[#A0A0A0] hover:text-[#0284C7] dark:hover:text-[#38BDF8] border-t border-[#E5E5E5] dark:border-[#2A2A2A] transition-colors">
                 <span>Ambam · Région du Sud · Cameroun 🇨🇲</span>
                 <span className="font-semibold">Ouvrir la carte →</span>
               </a>
-            </div>
-          </motion.div>
-        </div>
+            </motion.div>
+          </div>
       </div>
-    </section>
+    </div>
   )
 }

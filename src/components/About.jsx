@@ -28,7 +28,7 @@ function ValueIcon({ Icon }) {
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }} />
       </svg>
       <div className="absolute inset-0 flex items-center justify-center">
-        <Icon size={17} className="text-white" />
+        <Icon size={17} className="text-[#0A0A0A] dark:text-white" />
       </div>
     </div>
   )
@@ -43,16 +43,16 @@ export default function About() {
   }
 
   return (
-    <section id="about" className="section-pad bg-[#0A0A0A] overflow-hidden border-b border-[#2A2A2A]/50">
+    <section id="about" className="section-pad bg-white dark:bg-[#0A0A0A] overflow-hidden border-b border-[#E5E5E5]/70 dark:border-[#2A2A2A]/50">
       <div className="container-xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-start">
 
           <motion.div initial={{ opacity: 0, x: -24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
             <h2 className="section-title">Une vision née sur le terrain.</h2>
-            <p className="text-[#A0A0A0] leading-relaxed mb-6">
+            <p className="text-[#6B6B6B] dark:text-[#A0A0A0] leading-relaxed mb-6">
               MMstack est né d'un constat simple : les solutions IT proposées en Afrique centrale ne correspondent pas toujours aux réalités du terrain. Nous avons décidé de changer ça depuis Ambam, au Cameroun.
             </p>
-            <p className="text-[#A0A0A0] leading-relaxed mb-10">
+            <p className="text-[#6B6B6B] dark:text-[#A0A0A0] leading-relaxed mb-10">
               Nous construisons des outils concrets — des apps qui fonctionnent sans connexion parfaite, des sites optimisés pour les mobiles d'entrée de gamme, des solutions ancrées dans la réalité locale.
             </p>
 
@@ -61,8 +61,8 @@ export default function About() {
                 <motion.div key={v.label} variants={valueItem} className="flex gap-4 items-start">
                   <ValueIcon Icon={v.icon} />
                   <div>
-                    <div className="font-bold text-white text-sm mb-0.5">{v.label}</div>
-                    <div className="text-[#A0A0A0] text-sm leading-relaxed">{v.desc}</div>
+                    <div className="font-bold text-[#0A0A0A] dark:text-white text-sm mb-0.5">{v.label}</div>
+                    <div className="text-[#6B6B6B] dark:text-[#A0A0A0] text-sm leading-relaxed">{v.desc}</div>
                   </div>
                 </motion.div>
               ))}
@@ -77,9 +77,9 @@ export default function About() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="p-6 border border-[#2A2A2A] rounded-xl bg-[#1A1A1A] hover:border-[#38BDF8]/20 transition-colors duration-300">
-                <div className="font-bold text-white mb-2">{p.title}</div>
-                <p className="text-sm text-[#A0A0A0] leading-relaxed">{p.desc}</p>
+                className="p-6 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-xl bg-[#F5F5F5] dark:bg-[#1A1A1A] hover:border-[#38BDF8]/40 dark:hover:border-[#38BDF8]/20 transition-colors duration-300">
+                <div className="font-bold text-[#0A0A0A] dark:text-white mb-2">{p.title}</div>
+                <p className="text-sm text-[#6B6B6B] dark:text-[#A0A0A0] leading-relaxed">{p.desc}</p>
               </motion.div>
             ))}
 
@@ -88,7 +88,7 @@ export default function About() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="relative rounded-2xl overflow-hidden border border-[#2A2A2A]">
+              className="relative rounded-2xl overflow-hidden border border-[#E5E5E5] dark:border-[#2A2A2A]">
               <img
                 src="/team-mmstack.jpg"
                 alt="L'équipe MMstack à Ambam, Cameroun"

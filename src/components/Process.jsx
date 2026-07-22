@@ -33,7 +33,7 @@ export default function Process() {
   }
 
   return (
-    <section id="process" className="section-pad bg-[#0D0D0D] border-b border-[#2A2A2A]/50">
+    <section id="process" className="section-pad bg-white dark:bg-[#0D0D0D] border-b border-[#E5E5E5]/70 dark:border-[#2A2A2A]/50">
       <div className="container-xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -57,15 +57,15 @@ export default function Process() {
             const Icon = step.icon
             return (
               <motion.li key={step.title} variants={item} className="relative">
-                <div className="h-full p-6 rounded-xl border border-[#2A2A2A] bg-[#1A1A1A]">
+                <div className="h-full p-6 rounded-xl border border-[#E5E5E5] dark:border-[#2A2A2A] bg-[#F5F5F5] dark:bg-[#1A1A1A]">
                   <div className="flex items-center gap-3 mb-4">
-                    <span className="text-[#38BDF8] font-mono text-sm font-bold">{String(i + 1).padStart(2, '0')}</span>
+                    <span className="text-[#0284C7] dark:text-[#38BDF8] font-mono text-sm font-bold">{String(i + 1).padStart(2, '0')}</span>
                     <div className="w-9 h-9 rounded-lg bg-[#38BDF8]/10 flex items-center justify-center">
-                      <Icon size={18} className="text-[#38BDF8]" />
+                      <Icon size={18} className="text-[#0284C7] dark:text-[#38BDF8]" />
                     </div>
                   </div>
-                  <h3 className="font-bold text-white mb-2">{step.title}</h3>
-                  <p className="text-[#A0A0A0] text-sm leading-relaxed">{step.desc}</p>
+                  <h3 className="font-bold text-[#0A0A0A] dark:text-white mb-2">{step.title}</h3>
+                  <p className="text-[#6B6B6B] dark:text-[#A0A0A0] text-sm leading-relaxed">{step.desc}</p>
                 </div>
               </motion.li>
             )

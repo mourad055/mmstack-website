@@ -28,16 +28,16 @@ const faqs = [
 function FAQItem({ item, isOpen, onToggle }) {
   const reduce = useReducedMotion()
   return (
-    <div className="border-b border-[#2A2A2A]">
+    <div className="border-b border-[#E5E5E5] dark:border-[#2A2A2A]">
       <button
         onClick={onToggle}
         aria-expanded={isOpen}
         className="w-full flex items-center justify-between gap-4 py-5 text-left group">
-        <span className="font-semibold text-white group-hover:text-[#38BDF8] transition-colors">{item.q}</span>
+        <span className="font-semibold text-[#0A0A0A] dark:text-white group-hover:text-[#0284C7] dark:group-hover:text-[#38BDF8] transition-colors">{item.q}</span>
         <motion.span
           animate={{ rotate: isOpen ? 45 : 0 }}
           transition={{ duration: reduce ? 0 : 0.2 }}
-          className="shrink-0 text-[#A0A0A0] group-hover:text-[#38BDF8]">
+          className="shrink-0 text-[#6B6B6B] dark:text-[#A0A0A0] group-hover:text-[#0284C7] dark:group-hover:text-[#38BDF8]">
           <Plus size={18} />
         </motion.span>
       </button>
@@ -49,7 +49,7 @@ function FAQItem({ item, isOpen, onToggle }) {
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: reduce ? 0 : 0.3, ease: [0.16, 1, 0.3, 1] }}
             className="overflow-hidden">
-            <p className="text-[#A0A0A0] text-sm leading-relaxed pb-5 pr-8">{item.a}</p>
+            <p className="text-[#6B6B6B] dark:text-[#A0A0A0] text-sm leading-relaxed pb-5 pr-8">{item.a}</p>
           </motion.div>
         )}
       </AnimatePresence>
@@ -61,7 +61,7 @@ export default function FAQ() {
   const [openIndex, setOpenIndex] = useState(0)
 
   return (
-    <section id="faq" className="section-pad bg-[#0A0A0A] border-b border-[#2A2A2A]/50">
+    <section id="faq" className="section-pad bg-white dark:bg-[#0A0A0A] border-b border-[#E5E5E5]/70 dark:border-[#2A2A2A]/50">
       <div className="container-xl mx-auto max-w-3xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

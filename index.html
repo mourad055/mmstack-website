@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="fr" class="dark">
+<html lang="fr">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
@@ -20,8 +20,21 @@
     <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;800&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
     <title>MMstack — Digital Solutions from Cameroon</title>
     <script>
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('mmstack-theme', 'dark');
+      // Anti-FOUC : posé avant le premier rendu React. Préférence mémorisée en priorité,
+      // sinon préférence système (prefers-color-scheme), sinon sombre par défaut.
+      (function () {
+        try {
+          var stored = localStorage.getItem('mmstack-theme');
+          var isDark = stored === 'light'
+            ? false
+            : stored === 'dark'
+              ? true
+              : window.matchMedia('(prefers-color-scheme: dark)').matches;
+          document.documentElement.classList.toggle('dark', isDark);
+        } catch (e) {
+          document.documentElement.classList.add('dark');
+        }
+      })();
     </script>
   </head>
   <body>
