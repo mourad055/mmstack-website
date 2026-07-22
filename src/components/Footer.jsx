@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { Mail, Github, MessageCircle, ArrowUp, ChevronUp } from 'lucide-react'
 import { useTheme } from '../hooks/useDarkMode.jsx'
+import { EMAIL_CC, EMAIL_MAIN, whatsappHref, WHATSAPP_EXTRA, WHATSAPP_MAIN } from '../config/contacts'
 
 export function BackToTop() {
   const [show, setShow] = useState(false)
@@ -29,7 +30,6 @@ export function BackToTop() {
   )
 }
 
-const WA = '237697074455'
 const GITHUB = 'https://github.com/mourad055/mmstack-website'
 
 const cols = [
@@ -65,16 +65,20 @@ const cols = [
     title: 'Nous joindre',
     links: [
       { label: 'Formulaire', href: '#contact' },
-      { label: 'WhatsApp', href: `https://wa.me/${WA}`, external: true },
-      { label: 'Email', href: 'mailto:nkwanemourad50@gmail.com' },
+      { label: WHATSAPP_MAIN.display.replace('+237 ', 'WA '), href: whatsappHref(), external: true },
+      { label: WHATSAPP_EXTRA.display.replace('+237 ', 'WA '), href: whatsappHref(undefined, WHATSAPP_EXTRA.digits), external: true },
+      { label: EMAIL_MAIN, href: `mailto:${EMAIL_MAIN}` },
+      { label: EMAIL_CC, href: `mailto:${EMAIL_CC}` },
       { label: 'GitHub', href: GITHUB, external: true },
     ],
   },
 ]
 
 const socials = [
-  { icon: Mail, href: 'mailto:nkwanemourad50@gmail.com', label: 'Email' },
-  { icon: MessageCircle, href: `https://wa.me/${WA}`, label: 'WhatsApp' },
+  { icon: Mail, href: `mailto:${EMAIL_MAIN}`, label: 'Email' },
+  { icon: Mail, href: `mailto:${EMAIL_CC}`, label: 'Email (copie)' },
+  { icon: MessageCircle, href: whatsappHref(), label: 'WhatsApp' },
+  { icon: MessageCircle, href: whatsappHref(undefined, WHATSAPP_EXTRA.digits), label: 'WhatsApp (2)' },
   { icon: Github, href: GITHUB, label: 'GitHub' },
 ]
 

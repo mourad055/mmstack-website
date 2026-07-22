@@ -1,12 +1,11 @@
 import { motion } from 'framer-motion'
 import { MessageCircle } from 'lucide-react'
-
-const WA = '237697074455'
+import { whatsappHref } from '../config/contacts'
 
 export default function WhatsAppButton() {
   return (
     <motion.a
-      href={`https://wa.me/${WA}?text=${encodeURIComponent('Bonjour MMstack 👋 Je voudrais discuter d\'un projet.')}`}
+      href={whatsappHref('Bonjour MMstack 👋 Je voudrais discuter d\'un projet.')}
       target="_blank"
       rel="noreferrer"
       aria-label="Contacter MMstack sur WhatsApp"

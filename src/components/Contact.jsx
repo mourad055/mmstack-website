@@ -2,9 +2,15 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { Mail, MapPin, Phone, Send, Loader2 } from 'lucide-react'
 import ScrollReveal from './ScrollReveal'
-
-const ENDPOINT = 'https://formspree.io/f/xqeogeng'
-const WA = '237697074455'
+import {
+  EMAIL_CC,
+  EMAIL_MAIN,
+  FORMSPREE_CC,
+  FORMSPREE_ENDPOINT,
+  WHATSAPP_EXTRA,
+  WHATSAPP_MAIN,
+  whatsappHref,
+} from '../config/contacts'
 
 const SERVICE_OPTIONS = ['Développement logiciel', 'Création de site web', 'Installation & config', 'Conseil IT', 'Autre']
 
@@ -12,8 +18,10 @@ const FIELD = 'w-full border border-[#E5E5E5] dark:border-[#2A2A2A] bg-white dar
 
 const infoCards = [
   { icon: MapPin, label: 'Adresse', value: 'Ambam, Région du Sud\nCameroun 🇨🇲' },
-  { icon: Phone, label: 'WhatsApp', value: '+237 697 074 455', href: `https://wa.me/${WA}?text=${encodeURIComponent("Bonjour MMstack 👋 Je souhaite discuter d'un projet.")}` },
-  { icon: Mail, label: 'Email', value: 'nkwanemourad50@gmail.com', href: 'mailto:nkwanemourad50@gmail.com' },
+  { icon: Phone, label: 'WhatsApp', value: WHATSAPP_MAIN.display, href: whatsappHref() },
+  { icon: Phone, label: 'WhatsApp', value: WHATSAPP_EXTRA.display, href: whatsappHref(undefined, WHATSAPP_EXTRA.digits) },
+  { icon: Mail, label: 'Email', value: EMAIL_MAIN, href: `mailto:${EMAIL_MAIN}` },
+  { icon: Mail, label: 'Email', value: EMAIL_CC, href: `mailto:${EMAIL_CC}` },
 ]
 
 export default function Contact() {
@@ -34,10 +42,15 @@ export default function Contact() {
     e.preventDefault()
     setStatus('sending')
     try {
-      const res = await fetch(ENDPOINT, {
+      const res = await fetch(FORMSPREE_ENDPOINT, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify({
+          ...form,
+          _cc: FORMSPREE_CC,
+          _replyto: form.email,
+          _subject: `MMstack — ${form.service || 'Nouveau message'}`,
+        }),
       })
       setStatus(res.ok ? 'success' : 'error')
     } catch {
@@ -164,7 +177,7 @@ export default function Contact() {
               </motion.div>
             )
             return (
-              <ScrollReveal key={c.label} direction="right" delay={reduce ? 0 : i * 0.08}>
+              <ScrollReveal key={c.value} direction="right" delay={reduce ? 0 : i * 0.08}>
                 {c.href ? (
                   <a href={c.href} target="_blank" rel="noreferrer" className="block h-full">{inner}</a>
                 ) : (

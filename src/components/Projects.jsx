@@ -9,8 +9,11 @@ const projects = [
     result: 'Adopté par des étudiants',
     stack: ['FastAPI', 'React', 'LaTeX'],
     accent: '#A78BFA',
-    visual: null,
-    icon: '📄',
+    logo: 'lexis-logo.png',
+    logoBg: 'bg-white',
+    href: 'https://lexis.services-ztf.com/',
+    cta: 'Accéder à l\'app',
+    external: true,
   },
   {
     title: 'Scolia',
@@ -19,17 +22,33 @@ const projects = [
     result: 'En déploiement',
     stack: ['React', 'Node.js', 'PDF'],
     accent: '#38BDF8',
-    visual: null,
-    icon: '🪪',
+    logo: 'scolia-logo.png',
+    logoBg: 'bg-white',
+    href: '#contact',
+    cta: 'Projet similaire',
+    external: false,
   },
 ]
 
 function ProjectVisual({ project }) {
+  if (project.logo) {
+    return (
+      <div className={`relative h-44 flex items-center justify-center overflow-hidden ${project.logoBg || 'bg-[#EFF6FF] dark:bg-[#0F172A]'}`}>
+        <img
+          src={`/${project.logo}`}
+          alt={`Logo ${project.title}`}
+          loading="lazy"
+          className="max-h-[72%] max-w-[78%] w-auto object-contain transition-transform duration-500 group-hover:scale-105"
+        />
+      </div>
+    )
+  }
+
   if (project.visual) {
     return (
       <div className="relative h-44 overflow-hidden">
         <img
-        src={`/${project.visual}`}
+          src={`/${project.visual}`}
           alt={project.title}
           loading="lazy"
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
@@ -115,9 +134,10 @@ export default function Projects() {
                 </div>
 
                 <a
-                  href="#contact"
+                  href={p.href}
+                  {...(p.external ? { target: '_blank', rel: 'noreferrer' } : {})}
                   className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#0284C7] dark:text-[#38BDF8] hover:text-[#0A0A0A] dark:hover:text-white transition-colors">
-                  Projet similaire
+                  {p.cta}
                   <ArrowRight size={14} />
                 </a>
               </div>

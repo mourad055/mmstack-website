@@ -3,6 +3,7 @@ import { Menu, X } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useTheme } from '../hooks/useDarkMode.jsx'
 import ThemeToggle from './ThemeToggle'
+import { whatsappHref } from '../config/contacts'
 
 const links = [
   { label: 'Services', href: '#services' },
@@ -94,7 +95,7 @@ export default function Navbar() {
               <a href="#contact" onClick={() => setOpen(false)} className="btn-primary block text-center">
                 Nous contacter
               </a>
-              <a href="https://wa.me/237697074455" target="_blank" rel="noreferrer"
+              <a href={whatsappHref()} target="_blank" rel="noreferrer"
                 className="btn-outline block text-center">
                 WhatsApp direct
               </a>

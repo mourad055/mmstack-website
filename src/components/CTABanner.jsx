@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { whatsappHref } from '../config/contacts'
 
 export default function CTABanner() {
   return (
@@ -37,7 +38,7 @@ export default function CTABanner() {
             className="bg-[#0A0A0A] text-white dark:bg-white dark:text-[#0F172A] px-7 py-3.5 rounded-full font-semibold text-sm hover:opacity-90 hover:scale-105 transition-all duration-200">
             Démarrer un projet →
           </a>
-          <a href="https://wa.me/237697074455" target="_blank" rel="noreferrer"
+          <a href={whatsappHref()} target="_blank" rel="noreferrer"
             className="border border-[#0A0A0A]/25 bg-[#0A0A0A]/5 text-[#0A0A0A] dark:border-white/25 dark:bg-white/5 dark:text-white px-7 py-3.5 rounded-full font-semibold text-sm hover:bg-[#0A0A0A]/15 dark:hover:bg-white/15 hover:border-[#0A0A0A]/40 dark:hover:border-white/40 transition-all duration-200">
             Discuter sur WhatsApp
           </a>
