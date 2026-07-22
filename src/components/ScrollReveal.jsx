@@ -1,27 +1,43 @@
 import { motion, useReducedMotion } from 'framer-motion'
 
 const DIRECTIONS = {
-  up: { y: 60 },
-  down: { y: -60 },
-  left: { x: -60 },
-  right: { x: 60 },
+  up: { y: 48 },
+  down: { y: -48 },
+  left: { x: -40 },
+  right: { x: 40 },
 }
 
-/* Révélation au scroll avec deblur — la signature des sites premium */
-export default function ScrollReveal({ children, delay = 0, direction = 'up', className = '' }) {
+const EASE = [0.16, 1, 0.3, 1]
+
+/**
+ * Révélation au scroll : flou → net + glissement.
+ * Chaque instance a son propre observateur viewport — idéal pour un dévoilement
+ * un-à-un pendant le scroll (pas un stagger groupé qui part en bloc).
+ */
+export default function ScrollReveal({
+  children,
+  delay = 0,
+  direction = 'up',
+  className = '',
+  as = 'div',
+  margin = '-18% 0px -12% 0px',
+  duration = 0.7,
+}) {
   const reduce = useReducedMotion()
+  const Mot = motion[as] || motion.div
   const offset = DIRECTIONS[direction] || DIRECTIONS.up
 
   if (reduce) return <div className={className}>{children}</div>
 
   return (
-    <motion.div
+    <Mot
       className={className}
-      initial={{ opacity: 0, ...offset, filter: 'blur(8px)' }}
+      initial={{ opacity: 0, ...offset, filter: 'blur(10px)' }}
       whileInView={{ opacity: 1, x: 0, y: 0, filter: 'blur(0px)' }}
-      viewport={{ once: true, margin: '-80px' }}
-      transition={{ duration: 0.8, delay, ease: [0.16, 1, 0.3, 1] }}>
+      viewport={{ once: true, margin }}
+      transition={{ duration, delay, ease: EASE }}
+    >
       {children}
-    </motion.div>
+    </Mot>
   )
 }

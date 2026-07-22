@@ -3,34 +3,6 @@ import { ArrowRight } from 'lucide-react'
 
 const projects = [
   {
-    title: 'Site Hôtel Central Ambam',
-    category: 'Site vitrine',
-    desc: 'Site web moderne avec fiche hôtel, galerie et référencement local pour un établissement à Ambam.',
-    result: 'Livré en 1 semaine',
-    stack: ['React', 'SEO', 'Responsive'],
-    accent: '#34D399',
-    visual: 'sites-web.jpg',
-  },
-  {
-    title: 'MicroLab Virtuel',
-    category: 'Plateforme web',
-    desc: 'Environnement pédagogique interactif pour travaux pratiques en ligne, avec parcours guidés.',
-    result: 'Usage académique',
-    stack: ['Laravel', 'Vue.js', 'IA'],
-    accent: '#38BDF8',
-    visual: 'dev-logiciel.jpg',
-  },
-  {
-    title: 'MBIO App',
-    category: 'Application mobile',
-    desc: 'Application de mobilité pensée pour le contexte camerounais — géolocalisation et réservation.',
-    result: 'Prototype fonctionnel',
-    stack: ['Flutter', 'Firebase', 'Maps'],
-    accent: '#34D399',
-    visual: null,
-    icon: '🚕',
-  },
-  {
     title: 'Lexis',
     category: 'Outil SaaS',
     desc: 'Générateur automatique de rapports de stage aux normes ESTLC — export PDF en un clic. Anciennement DocForge.',
@@ -43,7 +15,7 @@ const projects = [
   {
     title: 'Scolia',
     category: 'Outil SaaS',
-    desc: "Génération automatisée de cartes scolaires pour établissements — mise en page, photos et export en lot.",
+    desc: 'Génération automatisée de cartes scolaires pour établissements — mise en page, photos et export en lot.',
     result: 'En déploiement',
     stack: ['React', 'Node.js', 'PDF'],
     accent: '#38BDF8',
@@ -98,7 +70,7 @@ export default function Projects() {
           <div className="max-w-xl">
             <h2 className="section-title mb-0">Réalisations sélectionnées</h2>
             <p className="section-sub mt-4">
-              Quelques projets concrets livrés depuis Ambam — du site vitrine à l'application sur mesure.
+              Deux produits concrets construits depuis Ambam — génération de documents et cartes scolaires.
             </p>
           </div>
           <a href="#contact" className="btn-outline shrink-0 self-start md:self-auto">

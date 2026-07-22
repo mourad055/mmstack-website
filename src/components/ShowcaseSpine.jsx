@@ -11,10 +11,9 @@ import BuilderShowcase from './three/BuilderShowcase'
  * normalement à côté — le modèle est ainsi TOUJOURS en évidence, jamais recouvert par un
  * fond opaque (chaque colonne a sa propre cellule de grille, sans superposition).
  *
- * La colonne 3D est volontairement `1fr` (flexible) contre une colonne de contenu à
- * largeur FIXE : sur grand écran, ça laisse au cluster de blocs énormément de place pour
- * exploiter les extrémités gauche/droite de l'écran, sans jamais risquer de chevaucher le
- * texte (les deux colonnes restent side-by-side, aucune superposition).
+ * La colonne contenu est volontairement large (≈820–920px) pour que Services,
+ * Testimonials et Contact restent confortables à lire, tout en laissant assez
+ * d'espace à gauche pour le cluster 3D.
  *
  * `spineRef` délimite la portion de scroll sur laquelle la progression 0→1 de l'animation
  * 3D est calculée (voir BuilderShowcaseCanvas) — jamais le scroll global de la page.
@@ -24,14 +23,14 @@ export default function ShowcaseSpine() {
 
   return (
     <div ref={spineRef} className="relative bg-white dark:bg-[#0A0A0A] border-b border-[#E5E5E5]/70 dark:border-[#2A2A2A]/50">
-      <div className="max-w-[1800px] mx-auto pl-0 pr-6 md:pr-12 lg:pr-16 grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_640px] xl:grid-cols-[minmax(0,1fr)_720px] gap-x-8 xl:gap-x-16">
+      <div className="max-w-[1800px] mx-auto pl-0 pr-6 md:pr-12 lg:pr-16 grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,820px)] xl:grid-cols-[minmax(0,1fr)_minmax(0,920px)] gap-x-8 xl:gap-x-12">
         <div className="hidden lg:block">
           <div className="sticky top-0 h-screen flex items-center justify-center">
             <BuilderShowcase spineRef={spineRef} />
           </div>
         </div>
 
-        <div className="flex flex-col gap-24 lg:gap-32 pt-8 lg:pt-12 pb-20 lg:pb-28">
+        <div className="flex flex-col gap-28 lg:gap-40 pt-8 lg:pt-12 pb-20 lg:pb-28">
           <Services />
           <Testimonials />
           <Contact />

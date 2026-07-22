@@ -1,6 +1,7 @@
-import { motion, useReducedMotion } from 'framer-motion'
 import { Code2, Globe, HardDrive, Lightbulb, ArrowRight } from 'lucide-react'
+import { motion, useReducedMotion } from 'framer-motion'
 import { SpotlightCard } from '../utils/premium'
+import ScrollReveal from './ScrollReveal'
 
 const DotGrid = ({ id }) => (
   <svg className="absolute inset-0 w-full h-full opacity-[0.1] dark:opacity-[0.08]" xmlns="http://www.w3.org/2000/svg">
@@ -49,28 +50,28 @@ const services = [
     contactService: 'Développement logiciel',
     desc: 'Applications sur mesure pour résoudre vos problèmes spécifiques — web, mobile et desktop. Du concept au déploiement, on construit des produits qui tiennent la charge.',
     Pattern: DotGrid, patternId: 'svc-dots', badge: 'Full-stack', badgeColor: '#38BDF8',
-    photo: '/dev-logiciel.jpg', span: 'md:col-span-2 md:row-span-2', big: true,
+    photo: '/dev-logiciel.jpg', big: true,
   },
   {
     icon: Globe, title: 'Création de sites web',
     contactService: 'Création de site web',
     desc: 'Sites vitrine modernes, rapides et optimisés SEO.',
     Pattern: ScanLines, patternId: 'svc-lines', badge: 'React · WordPress', badgeColor: '#34D399',
-    photo: '/sites-web.jpg', span: 'md:col-span-1',
+    photo: '/sites-web.jpg',
   },
   {
     icon: HardDrive, title: 'Installation & config',
     contactService: 'Installation & config',
     desc: 'Logiciels pro, OS et environnements de travail.',
     Pattern: GridLines, patternId: 'svc-grid', badge: 'Windows · Linux · macOS', badgeColor: '#A78BFA',
-    photo: '/configuration-installation.jpg', span: 'md:col-span-1',
+    photo: '/configuration-installation.jpg',
   },
   {
     icon: Lightbulb, title: 'Conseil IT',
     contactService: 'Conseil IT',
     desc: 'Audit de vos besoins numériques et accompagnement dans votre transformation digitale — une stratégie claire, des priorités concrètes.',
     Pattern: Hexagons, patternId: 'svc-hex', badge: 'Audit · Stratégie', badgeColor: '#34D399',
-    photo: '/conseil-it.jpg', span: 'md:col-span-3',
+    photo: '/conseil-it.jpg',
   },
 ]
 
@@ -83,67 +84,72 @@ export default function Services() {
 
   return (
     <div id="services" className="scroll-mt-24">
-      <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
+      <ScrollReveal direction="right" className="mb-14">
         <h2 className="section-title">Nos services</h2>
-        <p className="section-sub mb-14">Des solutions digitales pensées pour le contexte camerounais et africain.</p>
-      </motion.div>
+        <p className="section-sub mt-4">Des solutions digitales pensées pour le contexte camerounais et africain.</p>
+      </ScrollReveal>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-        {services.map((s) => {
+        {services.map((s, i) => {
           const Icon = s.icon
           return (
-            <motion.div
+            <ScrollReveal
               key={s.title}
-              initial={reduce ? { opacity: 1 } : { opacity: 0, y: 60 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-100px' }}
-              transition={{ duration: s.big ? 0.7 : 0.55, ease: [0.16, 1, 0.3, 1] }}
-              className={s.big ? 'sm:col-span-2' : ''}>
-                <SpotlightCard className="h-full flex flex-col overflow-hidden rounded-xl border border-[#E5E5E5] dark:border-[#2A2A2A] bg-[#F5F5F5] dark:bg-[#1A1A1A] hover:-translate-y-1 transition-transform duration-300">
-                  {s.photo ? (
-                    <div className={`relative ${s.big ? 'h-64 md:h-72' : 'h-44 md:h-48'} overflow-hidden`}>
-                      <img
-                        src={s.photo}
-                        alt={`${s.title} — MMstack`}
-                        loading="lazy"
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A]/70 via-[#0F172A]/10 to-transparent" />
-                      <span
-                        className="absolute bottom-3 left-3 text-[10px] font-semibold px-2.5 py-1 rounded-full backdrop-blur-sm"
-                        style={{ color: s.badgeColor, backgroundColor: s.badgeColor + '26', border: `1px solid ${s.badgeColor}33` }}>
-                        {s.badge}
-                      </span>
-                    </div>
-                  ) : (
-                    <div className={`relative ${s.big ? 'h-56' : 'h-44'} bg-[#EFF6FF] dark:bg-[#0F172A] flex flex-col items-center justify-center overflow-hidden`}>
-                      <s.Pattern id={s.patternId} />
-                      <motion.div
-                        whileHover={reduce ? {} : { rotate: 12, scale: 1.1 }}
-                        transition={{ type: 'spring', stiffness: 300, damping: 18 }}
-                        className={`relative z-10 ${s.big ? 'w-20 h-20' : 'w-16 h-16'} rounded-2xl bg-[#0A0A0A]/5 dark:bg-white/10 backdrop-blur flex items-center justify-center border border-[#0A0A0A]/10 dark:border-white/10`}>
-                        <Icon size={s.big ? 38 : 30} className="text-[#0A0A0A] dark:text-white" />
-                      </motion.div>
-                      <span className="relative z-10 mt-3 text-[10px] font-semibold px-2.5 py-0.5 rounded-full"
-                        style={{ color: s.badgeColor, backgroundColor: s.badgeColor + '1A' }}>
-                        {s.badge}
-                      </span>
-                    </div>
-                  )}
-
-                  <div className={`flex flex-col flex-1 ${s.big ? 'p-8' : 'p-7'}`}>
-                    <h3 className={`font-bold text-[#0A0A0A] dark:text-white mb-2 ${s.big ? 'text-2xl' : 'text-lg'}`}>{s.title}</h3>
-                    <p className={`text-[#6B6B6B] dark:text-[#A0A0A0] leading-relaxed flex-1 ${s.big ? 'text-base max-w-md' : 'text-sm'}`}>{s.desc}</p>
-                    <a
-                      href={contactHref(s.contactService)}
-                      className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-[#0284C7] dark:text-[#38BDF8] hover:text-[#0A0A0A] dark:hover:text-white transition-colors group/link">
-                      Demander un devis
-                      <ArrowRight size={14} className="transition-transform group-hover/link:translate-x-0.5" />
-                    </a>
+              direction="right"
+              delay={reduce ? 0 : (i % 2) * 0.08}
+              className={s.big ? 'sm:col-span-2' : ''}
+            >
+              <SpotlightCard className="h-full flex flex-col overflow-hidden rounded-xl border border-[#E5E5E5] dark:border-[#2A2A2A] bg-[#F5F5F5] dark:bg-[#1A1A1A] hover:-translate-y-1 transition-transform duration-300">
+                {s.photo ? (
+                  <div className={`relative ${s.big ? 'h-64 md:h-72' : 'h-44 md:h-48'} overflow-hidden`}>
+                    <img
+                      src={s.photo}
+                      alt={`${s.title} — MMstack`}
+                      loading="lazy"
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A]/70 via-[#0F172A]/10 to-transparent" />
+                    <span
+                      className="absolute bottom-3 left-3 text-[10px] font-semibold px-2.5 py-1 rounded-full backdrop-blur-sm"
+                      style={{ color: s.badgeColor, backgroundColor: s.badgeColor + '26', border: `1px solid ${s.badgeColor}33` }}
+                    >
+                      {s.badge}
+                    </span>
                   </div>
-                </SpotlightCard>
-              </motion.div>
-            )
-          })}
+                ) : (
+                  <div className={`relative ${s.big ? 'h-56' : 'h-44'} bg-[#EFF6FF] dark:bg-[#0F172A] flex flex-col items-center justify-center overflow-hidden`}>
+                    <s.Pattern id={s.patternId} />
+                    <motion.div
+                      whileHover={reduce ? {} : { rotate: 12, scale: 1.1 }}
+                      transition={{ type: 'spring', stiffness: 300, damping: 18 }}
+                      className={`relative z-10 ${s.big ? 'w-20 h-20' : 'w-16 h-16'} rounded-2xl bg-[#0A0A0A]/5 dark:bg-white/10 backdrop-blur flex items-center justify-center border border-[#0A0A0A]/10 dark:border-white/10`}
+                    >
+                      <Icon size={s.big ? 38 : 30} className="text-[#0A0A0A] dark:text-white" />
+                    </motion.div>
+                    <span
+                      className="relative z-10 mt-3 text-[10px] font-semibold px-2.5 py-0.5 rounded-full"
+                      style={{ color: s.badgeColor, backgroundColor: s.badgeColor + '1A' }}
+                    >
+                      {s.badge}
+                    </span>
+                  </div>
+                )}
+
+                <div className={`flex flex-col flex-1 ${s.big ? 'p-8' : 'p-7'}`}>
+                  <h3 className={`font-bold text-[#0A0A0A] dark:text-white mb-2 ${s.big ? 'text-2xl' : 'text-lg'}`}>{s.title}</h3>
+                  <p className={`text-[#6B6B6B] dark:text-[#A0A0A0] leading-relaxed flex-1 ${s.big ? 'text-base max-w-xl' : 'text-sm'}`}>{s.desc}</p>
+                  <a
+                    href={contactHref(s.contactService)}
+                    className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-[#0284C7] dark:text-[#38BDF8] hover:text-[#0A0A0A] dark:hover:text-white transition-colors group/link"
+                  >
+                    Demander un devis
+                    <ArrowRight size={14} className="transition-transform group-hover/link:translate-x-0.5" />
+                  </a>
+                </div>
+              </SpotlightCard>
+            </ScrollReveal>
+          )
+        })}
       </div>
     </div>
   )
