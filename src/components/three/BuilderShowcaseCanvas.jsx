@@ -43,7 +43,9 @@ function Scene({ spineRef, theme }) {
     // cours) → 0.66–1 Contact (produit livré, assemblé). Zone morte de départ volontairement
     // très courte : les blocs doivent déjà être en mouvement dès la sortie du Hero, jamais figés.
     const assembleProgress = remap(p, 0.02, 0.94, 0, 1)
-    const rotY = remap(p, 0, 1, 0, Math.PI * 0.9)
+    // Rotation finale à π : la face −Z (où sont les 2 cubes vidéo) regarde
+    // plein cadre vers la caméra quand le mega-cube est assemblé.
+    const rotY = remap(p, 0, 1, 0, Math.PI)
 
     if (groupRef.current) {
       groupRef.current.rotation.y = THREE.MathUtils.lerp(groupRef.current.rotation.y, rotY, 0.035)
