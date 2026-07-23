@@ -26,5 +26,11 @@ export const EMAIL_MAIN = 'nkwanemourad50@gmail.com'
 /** Email ajouté — reçoit une copie de chaque soumission via `_cc` Formspree */
 export const EMAIL_CC = 'oppoytron@gmail.com'
 
-export const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xqeogeng'
+/**
+ * Endpoint Formspree (ID de formulaire). Configurable via VITE_FORMSPREE_ENDPOINT.
+ * Attention : toute variable VITE_* est publique dans le bundle — ce n’est PAS un secret.
+ * Les secrets backend (JWT, DB, clés privées) ne doivent JAMAIS vivre dans ce frontend.
+ */
+export const FORMSPREE_ENDPOINT =
+  import.meta.env.VITE_FORMSPREE_ENDPOINT || 'https://formspree.io/f/xqeogeng'
 export const FORMSPREE_CC = EMAIL_CC
