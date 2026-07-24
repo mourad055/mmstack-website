@@ -1,6 +1,6 @@
-import { useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { motion, useInView, useReducedMotion } from 'framer-motion'
-import { Shield, Zap, Heart } from 'lucide-react'
+import { Shield, Zap, Heart, Play } from 'lucide-react'
 
 const values = [
   { icon: Zap, label: 'Innovation', desc: 'Toujours à la pointe des technologies pour des solutions modernes.' },
@@ -30,6 +30,71 @@ function ValueIcon({ Icon }) {
       <div className="absolute inset-0 flex items-center justify-center">
         <Icon size={17} className="text-[#0A0A0A] dark:text-white" />
       </div>
+    </div>
+  )
+}
+
+function TeamMedia() {
+  const [playing, setPlaying] = useState(false)
+  const videoRef = useRef(null)
+  const reduce = useReducedMotion()
+
+  useEffect(() => {
+    if (!playing) return
+    const v = videoRef.current
+    if (!v) return
+    v.play().catch(() => setPlaying(false))
+  }, [playing])
+
+  const start = () => {
+    if (reduce) return
+    setPlaying(true)
+  }
+
+  const onEnded = () => {
+    setPlaying(false)
+    if (videoRef.current) videoRef.current.currentTime = 0
+  }
+
+  return (
+    <div className="relative rounded-2xl overflow-hidden border border-[#E5E5E5] dark:border-[#2A2A2A] bg-black">
+      {playing ? (
+        <video
+          ref={videoRef}
+          src="/mmstack-lancement.mp4"
+          poster="/team-mmstack.jpg"
+          className="w-full h-auto object-cover block"
+          controls
+          playsInline
+          onEnded={onEnded}
+        />
+      ) : (
+        <>
+          <img
+            src="/team-mmstack.jpg"
+            alt="L'équipe MMstack à Ambam, Cameroun"
+            loading="lazy"
+            className="w-full h-auto object-cover block"
+          />
+          {!reduce && (
+            <button
+              type="button"
+              onClick={start}
+              aria-label="Lire la vidéo de lancement MMstack"
+              className="absolute inset-0 flex items-center justify-center group cursor-pointer"
+            >
+              <span className="absolute inset-0 bg-black/25 group-hover:bg-black/35 transition-colors duration-300" />
+              <span className="relative z-10 flex items-center justify-center w-16 h-16 rounded-full bg-white/95 text-[#0A0A0A] shadow-lg shadow-black/25 group-hover:scale-110 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]">
+                <Play size={28} className="ml-0.5 fill-current" />
+              </span>
+            </button>
+          )}
+          <div className="absolute bottom-0 left-0 right-0 p-5 bg-gradient-to-t from-black/80 to-transparent pointer-events-none">
+            <p className="text-white font-semibold text-sm">L'équipe MMstack</p>
+            <p className="text-white/70 text-xs mt-0.5">Ambam, Cameroun 🇨🇲</p>
+          </div>
+        </>
+      )}
     </div>
   )
 }
@@ -88,17 +153,8 @@ export default function About() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="relative rounded-2xl overflow-hidden border border-[#E5E5E5] dark:border-[#2A2A2A]">
-              <img
-                src="/team-mmstack.jpg"
-                alt="L'équipe MMstack à Ambam, Cameroun"
-                loading="lazy"
-                className="w-full h-auto object-cover"
-              />
-              <div className="absolute bottom-0 left-0 right-0 p-5 bg-gradient-to-t from-black/80 to-transparent">
-                <p className="text-white font-semibold text-sm">L'équipe MMstack</p>
-                <p className="text-white/70 text-xs mt-0.5">Ambam, Cameroun 🇨🇲</p>
-              </div>
+            >
+              <TeamMedia />
             </motion.div>
           </div>
 
