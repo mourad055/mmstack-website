@@ -63,19 +63,19 @@
   background-color: #e8f3fa;
 }
 .dark .hero-mobile-bg {
-  --hero-grid: rgba(56, 189, 248, 0.35);
-  --hero-orb-a: rgba(56, 189, 248, 0.28);
-  --hero-orb-b: rgba(14, 165, 233, 0.18);
-  --block-face-0: #1a2332;
-  --block-face-1: #0f172a;
-  --block-top-0: #38bdf8;
-  --block-top-1: #0284c7;
-  --block-side-0: #164e63;
-  --block-side-1: #0c4a6e;
-  --block-stroke: rgba(56, 189, 248, 0.35);
+  --hero-grid: rgba(255, 255, 255, 0.06);
+  --hero-orb-a: transparent;
+  --hero-orb-b: transparent;
+  --block-face-0: #161616;
+  --block-face-1: #111111;
+  --block-top-0: #1f1f1f;
+  --block-top-1: #171717;
+  --block-side-0: #141414;
+  --block-side-1: #0e0e0e;
+  --block-stroke: rgba(255, 255, 255, 0.1);
   --block-accent: #38bdf8;
-  --block-shadow: rgba(56, 189, 248, 0.12);
-  background-color: #070b12;
+  --block-shadow: rgba(0, 0, 0, 0.35);
+  background-color: #0a0a0a;
 }
 .hero-mobile-wash {
   background:
@@ -83,17 +83,15 @@
     radial-gradient(ellipse at 90% 30%, rgba(14, 165, 233, 0.2), transparent 50%),
     linear-gradient(180deg, #f5fafd 0%, #d6eaf7 48%, #b8d9ee 100%);
 }
+/* Sombre : fond plat, sans halo / dégradé lumineux */
 .dark .hero-mobile-wash {
-  background:
-    radial-gradient(ellipse at 15% 10%, rgba(56, 189, 248, 0.22), transparent 50%),
-    radial-gradient(ellipse at 85% 40%, rgba(14, 165, 233, 0.12), transparent 45%),
-    linear-gradient(180deg, #0a1018 0%, #070b12 55%, #05080e 100%);
+  background: #0a0a0a;
 }
 .hero-mobile-floor {
   background: linear-gradient(to top, rgba(255, 255, 255, 0.72), transparent);
 }
 .dark .hero-mobile-floor {
-  background: linear-gradient(to top, #070b12, transparent);
+  background: none;
 }
 
 @layer utilities {

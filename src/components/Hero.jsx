@@ -31,7 +31,7 @@ export default function Hero({ introDone = true }) {
   const anim = introDone ? 'visible' : 'hidden'
 
   return (
-    <section className="relative min-h-screen flex flex-col overflow-hidden bg-[#E8F3FA] dark:bg-[#070B12] md:bg-[#0A0A0A] md:dark:bg-[#0A0A0A]">
+    <section className="relative min-h-screen flex flex-col overflow-hidden bg-[#E8F3FA] dark:bg-[#0A0A0A] md:bg-[#0A0A0A] md:dark:bg-[#0A0A0A]">
 
       {/* Desktop : vidéo — Mobile : fond créatif thème-aware */}
       {isDesktop ? (
@@ -53,10 +53,8 @@ export default function Hero({ introDone = true }) {
           <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/20 to-transparent" />
         </>
       ) : (
-        <>
-          <div className="absolute inset-0 bg-gradient-to-r from-[#E8F3FA]/95 via-[#E8F3FA]/55 to-transparent dark:from-[#070B12]/92 dark:via-[#070B12]/55 dark:to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#E8F3FA]/80 dark:to-[#070B12]/85" />
-        </>
+        /* Clair : léger voile à gauche pour le texte. Sombre : aucun dégradé. */
+        <div className="absolute inset-0 bg-gradient-to-r from-[#E8F3FA]/90 via-[#E8F3FA]/40 to-transparent dark:hidden" />
       )}
 
       {/* Contenu */}

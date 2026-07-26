@@ -16,7 +16,7 @@ export default function HeroMobileBackdrop() {
       <div className="absolute inset-0 hero-mobile-wash" />
 
       {/* Grille fine */}
-      <svg className="absolute inset-0 h-full w-full opacity-[0.2] dark:opacity-[0.12]" xmlns="http://www.w3.org/2000/svg">
+      <svg className="absolute inset-0 h-full w-full opacity-[0.2] dark:opacity-[0.06]" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <pattern id="hero-grid" width="28" height="28" patternUnits="userSpaceOnUse">
             <path d="M 28 0 L 0 0 0 28" fill="none" stroke="var(--hero-grid)" strokeWidth="0.6" />
@@ -33,15 +33,15 @@ export default function HeroMobileBackdrop() {
         <rect width="100%" height="100%" fill="url(#hero-grid)" mask="url(#hero-grid-mask)" />
       </svg>
 
-      {/* Orbes lumineux */}
+      {/* Orbes — thème clair uniquement */}
       <motion.div
-        className="absolute -left-16 top-[18%] h-56 w-56 rounded-full blur-3xl"
+        className="absolute -left-16 top-[18%] h-56 w-56 rounded-full blur-3xl dark:hidden"
         style={{ background: 'var(--hero-orb-a)' }}
         animate={reduce ? undefined : { y: [0, 18, 0], opacity: [0.5, 0.85, 0.5] }}
         transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut' }}
       />
       <motion.div
-        className="absolute -right-10 top-[42%] h-72 w-72 rounded-full blur-3xl"
+        className="absolute -right-10 top-[42%] h-72 w-72 rounded-full blur-3xl dark:hidden"
         style={{ background: 'var(--hero-orb-b)' }}
         animate={reduce ? undefined : { y: [0, -22, 0], x: [0, -12, 0] }}
         transition={{ duration: 11, repeat: Infinity, ease: 'easeInOut' }}
@@ -50,9 +50,9 @@ export default function HeroMobileBackdrop() {
       {/* Stack de blocs — métaphore construction / cubes 3D */}
       <motion.svg
         viewBox="0 0 420 520"
-        className="absolute bottom-[-6%] right-[-18%] h-[78%] w-auto max-w-none sm:right-[-8%]"
-        animate={reduce ? undefined : { y: [0, -10, 0] }}
-        transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+        className="absolute bottom-[-6%] right-[-18%] h-[72%] w-auto max-w-none opacity-70 dark:opacity-40 sm:right-[-8%]"
+        animate={reduce ? undefined : { y: [0, -8, 0] }}
+        transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
       >
         <defs>
           <linearGradient id="block-face" x1="0" y1="0" x2="1" y2="1">
