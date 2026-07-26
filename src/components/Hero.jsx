@@ -1,6 +1,7 @@
 import { motion, useReducedMotion } from 'framer-motion'
 import { ChevronDown } from 'lucide-react'
 import { AnimatedCounter, useIsDesktop } from '../utils/premium'
+import HeroMobileBackdrop from './HeroMobileBackdrop'
 
 const HEADLINE = ['We', 'Build', 'Digital', 'Solutions', 'for', 'Africa.']
 
@@ -30,9 +31,9 @@ export default function Hero({ introDone = true }) {
   const anim = introDone ? 'visible' : 'hidden'
 
   return (
-    <section className="relative min-h-screen flex flex-col overflow-hidden bg-[#0A0A0A]">
+    <section className="relative min-h-screen flex flex-col overflow-hidden bg-[#E8F3FA] dark:bg-[#070B12] md:bg-[#0A0A0A] md:dark:bg-[#0A0A0A]">
 
-      {/* Fond — vidéo sur desktop, poster statique sur mobile (économie de données) */}
+      {/* Desktop : vidéo — Mobile : fond créatif thème-aware */}
       {isDesktop ? (
         <video
           className="absolute inset-0 w-full h-full object-cover hero-video"
@@ -41,18 +42,22 @@ export default function Hero({ introDone = true }) {
           <source src="/hero-bg.mp4" type="video/mp4" />
         </video>
       ) : (
-        <img
-          src="/hero-poster.jpg"
-          alt=""
-          aria-hidden
-          className="absolute inset-0 w-full h-full object-cover"
-        />
+        <HeroMobileBackdrop />
       )}
 
-      {/* Overlays */}
-      <div className="absolute inset-0 bg-black/60" />
-      <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/85" />
-      <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/20 to-transparent" />
+      {/* Overlays — légers sur mobile (lisibilité), cinématiques sur desktop */}
+      {isDesktop ? (
+        <>
+          <div className="absolute inset-0 bg-black/60" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/85" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/20 to-transparent" />
+        </>
+      ) : (
+        <>
+          <div className="absolute inset-0 bg-gradient-to-r from-[#E8F3FA]/95 via-[#E8F3FA]/55 to-transparent dark:from-[#070B12]/92 dark:via-[#070B12]/55 dark:to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#E8F3FA]/80 dark:to-[#070B12]/85" />
+        </>
+      )}
 
       {/* Contenu */}
       <div className="relative z-10 flex flex-col justify-center flex-1 pl-6 pr-6 md:pl-12 lg:pl-16 pt-32 pb-28 w-full">
@@ -60,20 +65,20 @@ export default function Hero({ introDone = true }) {
 
           {/* Badge */}
           <motion.div variants={rise} custom={0} initial="hidden" animate={anim}
-            className="mb-8 inline-flex self-start items-center rounded-full border border-white/20 bg-white/5 px-4 py-1.5 text-xs text-white/80 tracking-wide">
+            className="mb-8 inline-flex self-start items-center rounded-full border border-[#0284C7]/25 dark:border-white/20 md:border-white/20 bg-white/60 dark:bg-white/5 md:bg-white/5 px-4 py-1.5 text-xs text-[#0A0A0A]/75 dark:text-white/80 md:text-white/80 tracking-wide backdrop-blur-sm">
             🇨🇲 Ambam, Cameroun · Depuis 2025
           </motion.div>
 
           {/* Titre — mot par mot */}
           <motion.h1
             variants={wordContainer} initial="hidden" animate={anim}
-            className="text-5xl md:text-6xl lg:text-7xl xl:text-[5.5rem] font-black text-white leading-[1.05] tracking-tight text-balance">
+            className="text-5xl md:text-6xl lg:text-7xl xl:text-[5.5rem] font-black text-[#0A0A0A] dark:text-white md:text-white leading-[1.05] tracking-tight text-balance">
             {HEADLINE.map((word, i) => (
               <motion.span key={i} variants={wordItem} className="inline-block mr-4">
                 {word === 'Digital'
-                  ? <span className="italic font-light text-white/70">{word}</span>
+                  ? <span className="italic font-light text-[#0A0A0A]/55 dark:text-white/70 md:text-white/70">{word}</span>
                   : word === 'Africa.'
-                    ? <span className="text-[#38BDF8]">{word}</span>
+                    ? <span className="text-[#0284C7] dark:text-[#38BDF8] md:text-[#38BDF8]">{word}</span>
                     : word}
               </motion.span>
             ))}
@@ -81,7 +86,7 @@ export default function Hero({ introDone = true }) {
 
           {/* Sous-titre */}
           <motion.p variants={rise} custom={0.9} initial="hidden" animate={anim}
-            className="mt-6 text-lg md:text-xl text-white/75 max-w-md leading-relaxed">
+            className="mt-6 text-lg md:text-xl text-[#3F3F3F] dark:text-white/75 md:text-white/75 max-w-md leading-relaxed">
             Logiciels sur mesure, sites web et services IT depuis Ambam vers le monde entier.
           </motion.p>
 
@@ -89,24 +94,24 @@ export default function Hero({ introDone = true }) {
           <motion.div variants={rise} custom={1.05} initial="hidden" animate={anim}
             className="mt-10 flex flex-wrap items-center gap-4">
             <a href="#contact"
-              className="bg-white text-[#0F172A] px-7 py-3.5 rounded-full font-semibold text-sm hover:bg-white/90 hover:scale-105 transition-all duration-200">
+              className="bg-[#0A0A0A] text-white dark:bg-white dark:text-[#0F172A] md:bg-white md:text-[#0F172A] px-7 py-3.5 rounded-full font-semibold text-sm hover:opacity-90 hover:scale-105 transition-all duration-200">
               Démarrer un projet →
             </a>
             <a href="#services"
-              className="border border-white/25 bg-white/5 text-white px-7 py-3.5 rounded-full font-semibold text-sm hover:bg-white/15 hover:border-white/40 transition-all duration-200">
+              className="border border-[#0A0A0A]/25 dark:border-white/25 md:border-white/25 bg-white/50 dark:bg-white/5 md:bg-white/5 text-[#0A0A0A] dark:text-white md:text-white px-7 py-3.5 rounded-full font-semibold text-sm hover:bg-white/80 dark:hover:bg-white/15 md:hover:bg-white/15 transition-all duration-200 backdrop-blur-sm">
               Voir nos services
             </a>
           </motion.div>
 
           {/* Stats */}
           <motion.div variants={rise} custom={1.2} initial="hidden" animate={anim}
-            className="mt-16 pt-8 border-t border-white/10 flex flex-wrap gap-10 md:gap-16">
+            className="mt-16 pt-8 border-t border-[#0A0A0A]/10 dark:border-white/10 md:border-white/10 flex flex-wrap gap-10 md:gap-16">
             {stats.map((s) => (
               <div key={s.label}>
-                <div className="text-3xl font-black text-white">
+                <div className="text-3xl font-black text-[#0A0A0A] dark:text-white md:text-white">
                   <AnimatedCounter target={s.target} suffix={s.suffix} />
                 </div>
-                <div className="text-sm text-white/65 mt-1">{s.label}</div>
+                <div className="text-sm text-[#6B6B6B] dark:text-white/65 md:text-white/65 mt-1">{s.label}</div>
               </div>
             ))}
           </motion.div>
@@ -115,9 +120,9 @@ export default function Hero({ introDone = true }) {
 
       {/* Scroll indicator */}
       <div className="absolute bottom-8 left-0 right-0 hidden sm:flex flex-col items-center gap-2 z-10">
-        <span className="text-white/50 text-xs tracking-widest uppercase">Découvrir</span>
+        <span className="text-[#6B6B6B] dark:text-white/50 md:text-white/50 text-xs tracking-widest uppercase">Découvrir</span>
         <motion.div animate={reduce ? {} : { y: [0, 6, 0] }} transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}>
-          <ChevronDown size={18} className="text-white/50" />
+          <ChevronDown size={18} className="text-[#6B6B6B] dark:text-white/50 md:text-white/50" />
         </motion.div>
       </div>
     </section>
