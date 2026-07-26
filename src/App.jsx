@@ -4,7 +4,6 @@ import { useTheme } from './hooks/useDarkMode.jsx'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import ShowcaseSpine from './components/ShowcaseSpine'
-import Process from './components/Process'
 import Projects from './components/Projects'
 import About from './components/About'
 import FAQ from './components/FAQ'
@@ -55,7 +54,6 @@ export default function App() {
       <main className="relative z-10">
         <Hero introDone={!showIntro} />
         <ShowcaseSpine />
-        <Process />
         <Projects />
         <About />
         <FAQ />

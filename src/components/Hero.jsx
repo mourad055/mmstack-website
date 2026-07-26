@@ -6,7 +6,7 @@ const HEADLINE = ['We', 'Build', 'Digital', 'Solutions', 'for', 'Africa.']
 
 const stats = [
   { target: 24, suffix: 'h', label: 'Réponse garantie' },
-  { target: 4, suffix: '', label: 'Services IT' },
+  { target: 5, suffix: '', label: 'Services IT' },
   { target: 100, suffix: '%', label: 'Sur mesure' },
 ]
 

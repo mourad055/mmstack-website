@@ -1,22 +1,12 @@
 import { useRef } from 'react'
 import Services from './Services'
-import Testimonials from './Testimonials'
+import Process from './Process'
 import Contact from './Contact'
 import BuilderShowcase from './three/BuilderShowcase'
 
 /**
- * Regroupe Services + Testimonials + Contact dans une seule mise en scène : une colonne
- * gauche `sticky` (le cluster de blocs 3D qui s'assemble, visible desktop uniquement)
- * qui reste épinglée pendant que la colonne droite (cards, carrousel, formulaire) défile
- * normalement à côté — le modèle est ainsi TOUJOURS en évidence, jamais recouvert par un
- * fond opaque (chaque colonne a sa propre cellule de grille, sans superposition).
- *
- * La colonne contenu est volontairement large (≈820–920px) pour que Services,
- * Testimonials et Contact restent confortables à lire, tout en laissant assez
- * d'espace à gauche pour le cluster 3D.
- *
- * `spineRef` délimite la portion de scroll sur laquelle la progression 0→1 de l'animation
- * 3D est calculée (voir BuilderShowcaseCanvas) — jamais le scroll global de la page.
+ * Regroupe Services + Process + Contact dans une seule mise en scène : colonne
+ * gauche sticky (cubes 3D) + colonne droite qui défile.
  */
 export default function ShowcaseSpine() {
   const spineRef = useRef(null)
@@ -32,7 +22,7 @@ export default function ShowcaseSpine() {
 
         <div className="flex flex-col gap-28 lg:gap-40 pt-8 lg:pt-12 pb-20 lg:pb-28">
           <Services />
-          <Testimonials />
+          <Process />
           <Contact />
         </div>
       </div>

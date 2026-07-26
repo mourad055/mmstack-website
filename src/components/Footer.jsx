@@ -40,6 +40,7 @@ const cols = [
       { label: 'Création de sites web', href: '#services' },
       { label: 'Installation & config', href: '#services' },
       { label: 'Conseil IT', href: '#services' },
+      { label: 'Marketing digital', href: '#services' },
     ],
   },
   {
@@ -48,7 +49,6 @@ const cols = [
       { label: 'À propos', href: '#about' },
       { label: 'Réalisations', href: '#projects' },
       { label: 'Notre processus', href: '#process' },
-      { label: 'Témoignages', href: '#testimonials' },
       { label: 'FAQ', href: '#faq' },
     ],
   },

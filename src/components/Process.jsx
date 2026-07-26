@@ -1,5 +1,6 @@
-import { motion, useReducedMotion } from 'framer-motion'
 import { MessageSquare, FileSearch, Code2, Rocket } from 'lucide-react'
+import { useReducedMotion } from 'framer-motion'
+import ScrollReveal from './ScrollReveal'
 
 const steps = [
   {
@@ -26,52 +27,42 @@ const steps = [
 
 export default function Process() {
   const reduce = useReducedMotion()
-  const container = { hidden: {}, visible: { transition: { staggerChildren: reduce ? 0 : 0.1 } } }
-  const item = {
-    hidden: reduce ? { opacity: 1 } : { opacity: 0, y: 24 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } },
-  }
 
   return (
-    <section id="process" className="section-pad bg-white dark:bg-[#0D0D0D] border-b border-[#E5E5E5]/70 dark:border-[#2A2A2A]/50">
-      <div className="container-xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="max-w-2xl mb-14">
-          <h2 className="section-title">Comment on travaille</h2>
-          <p className="section-sub">
-            Un processus simple et transparent — de la première conversation à la livraison.
-          </p>
-        </motion.div>
+    <div id="process" className="scroll-mt-24">
+      <ScrollReveal direction="right" className="mb-14">
+        <h2 className="section-title">Comment on travaille</h2>
+        <p className="section-sub mt-4">
+          Un processus simple et transparent — de la première conversation à la livraison.
+        </p>
+      </ScrollReveal>
 
-        <motion.ol
-          variants={container}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-60px' }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {steps.map((step, i) => {
-            const Icon = step.icon
-            return (
-              <motion.li key={step.title} variants={item} className="relative">
-                <div className="h-full p-6 rounded-xl border border-[#E5E5E5] dark:border-[#2A2A2A] bg-[#F5F5F5] dark:bg-[#1A1A1A]">
-                  <div className="flex items-center gap-3 mb-4">
-                    <span className="text-[#0284C7] dark:text-[#38BDF8] font-mono text-sm font-bold">{String(i + 1).padStart(2, '0')}</span>
-                    <div className="w-9 h-9 rounded-lg bg-[#38BDF8]/10 flex items-center justify-center">
-                      <Icon size={18} className="text-[#0284C7] dark:text-[#38BDF8]" />
-                    </div>
+      <ol className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        {steps.map((step, i) => {
+          const Icon = step.icon
+          return (
+            <ScrollReveal
+              key={step.title}
+              direction="right"
+              delay={reduce ? 0 : (i % 2) * 0.08}
+              as="li"
+            >
+              <div className="h-full p-6 rounded-xl border border-[#E5E5E5] dark:border-[#2A2A2A] bg-[#F5F5F5] dark:bg-[#1A1A1A]">
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="text-[#0284C7] dark:text-[#38BDF8] font-mono text-sm font-bold">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <div className="w-9 h-9 rounded-lg bg-[#38BDF8]/10 flex items-center justify-center">
+                    <Icon size={18} className="text-[#0284C7] dark:text-[#38BDF8]" />
                   </div>
-                  <h3 className="font-bold text-[#0A0A0A] dark:text-white mb-2">{step.title}</h3>
-                  <p className="text-[#6B6B6B] dark:text-[#A0A0A0] text-sm leading-relaxed">{step.desc}</p>
                 </div>
-              </motion.li>
-            )
-          })}
-        </motion.ol>
-      </div>
-    </section>
+                <h3 className="font-bold text-[#0A0A0A] dark:text-white mb-2">{step.title}</h3>
+                <p className="text-[#6B6B6B] dark:text-[#A0A0A0] text-sm leading-relaxed">{step.desc}</p>
+              </div>
+            </ScrollReveal>
+          )
+        })}
+      </ol>
+    </div>
   )
 }

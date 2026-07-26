@@ -60,8 +60,7 @@ function Scene({ spineRef, theme }) {
     const px = pointerRef.current.x
     const py = pointerRef.current.y
 
-    // Beats : 0–0.33 Services (idées dispersées) → 0.33–0.66 Testimonials (assemblage en
-    // cours) → 0.66–1 Contact (produit livré, assemblé).
+    // Beats : 0–0.33 Services → 0.33–0.66 Process (assemblage) → 0.66–1 Contact (assemblé).
     const assembleProgress = remap(p, 0.02, 0.94, 0, 1)
     // Rotation finale à π : la face −Z (où sont les 2 cubes vidéo) regarde
     // plein cadre vers la caméra quand le mega-cube est assemblé.
@@ -120,7 +119,7 @@ function Scene({ spineRef, theme }) {
   return (
     <group ref={groupRef}>
       <Float speed={0.8} rotationIntensity={0.18} floatIntensity={0.4}>
-        <BlockCluster blocksRef={blocksRef} theme={theme} />
+        <BlockCluster blocksRef={blocksRef} />
       </Float>
     </group>
   )

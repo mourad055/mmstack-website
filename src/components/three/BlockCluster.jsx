@@ -1,13 +1,13 @@
 import { useMemo } from 'react'
 import * as THREE from 'three'
-import { useTexture } from '@react-three/drei'
-import { createMockupTexture } from './uiMockupTextures'
 import { useVideoTextures } from './useVideoTextures'
 
 /**
- * 8 blocs qui s'assemblent en un mega-cube. Deux d'entre eux portent des VideoTexture
- * et sont placés sur la face principale du mega-cube assemblé (face −Z, celle qui
- * regarde la caméra en fin d'animation après rotation Y ≈ π).
+ * 8 blocs qui s'assemblent en mega-cube — chaque face est une VideoTexture.
+ * 5 captures distinctes ; 3 reprises désynchronisées pour couvrir les 8 cubes
+ * sans alourdir davantage le bundle.
+ *
+ * Indices 0–3 = face −Z (face principale face caméra en fin d'animation).
  */
 
 export const SCATTERED_DIRECTIONS = [
@@ -15,64 +15,34 @@ export const SCATTERED_DIRECTIONS = [
   [0.12, 1.9, -0.6], [-0.14, -1.9, 0.5], [1, 0.3, 0.7], [-0.97, -0.3, -0.7],
 ]
 
-// Indices 0–3 : face −Z (face principale en fin d'animation).
-// 2 et 3 = rangée haute de cette face → vidéos bien visibles face caméra.
 export const ASSEMBLED_POSITIONS = [
-  [-0.27, -0.27, -0.27], // 0 back-bottom-left  → face principale, bas
-  [0.27, -0.27, -0.27],  // 1 back-bottom-right → face principale, bas
-  [-0.27, 0.27, -0.27],  // 2 back-top-left     → VIDEO 1
-  [0.27, 0.27, -0.27],   // 3 back-top-right    → VIDEO 2
-  [-0.27, -0.27, 0.27],  // 4 front-bottom-left
-  [0.27, -0.27, 0.27],   // 5 front-bottom-right
-  [-0.27, 0.27, 0.27],   // 6 front-top-left
-  [0.27, 0.27, 0.27],    // 7 front-top-right
+  [-0.27, -0.27, -0.27],
+  [0.27, -0.27, -0.27],
+  [-0.27, 0.27, -0.27],
+  [0.27, 0.27, -0.27],
+  [-0.27, -0.27, 0.27],
+  [0.27, -0.27, 0.27],
+  [-0.27, 0.27, 0.27],
+  [0.27, 0.27, 0.27],
 ]
 
-const PHOTO_PATHS = ['/dev-logiciel.jpg', '/sites-web.jpg']
-const VIDEO_PATHS = ['/cube-capture-1.mp4', '/cube-capture-2.mp4']
-
-const BLOCKS = [
-  { visual: { type: 'photo', src: '/dev-logiciel.jpg' } },
-  { visual: { type: 'photo', src: '/sites-web.jpg' } },
-  { visual: { type: 'video', src: '/cube-capture-1.mp4' } },
-  { visual: { type: 'video', src: '/cube-capture-2.mp4' } },
-  { visual: { type: 'mockup', kind: 'web' } },
-  { visual: { type: 'mockup', kind: 'mobile' } },
-  { visual: { type: 'mockup', kind: 'code' } },
-  { visual: { type: 'mockup', kind: 'dashboard' } },
+/** Une entrée par cube (8). Les 3 derniers réutilisent des captures avec offset. */
+const VIDEO_PATHS = [
+  '/cube-capture-1.mp4',
+  '/cube-capture-2.mp4',
+  '/cube-capture-3.mp4',
+  '/cube-capture-4.mp4',
+  '/cube-capture-5.mp4',
+  '/cube-capture-1.mp4',
+  '/cube-capture-3.mp4',
+  '/cube-capture-5.mp4',
 ]
 
-export default function BlockCluster({ blocksRef, theme = 'dark' }) {
+const VIDEO_OFFSETS = [0, 0.4, 0.8, 1.2, 0.2, 1.6, 2.0, 0.9]
+
+export default function BlockCluster({ blocksRef }) {
   const geometry = useMemo(() => new THREE.BoxGeometry(0.54, 0.54, 0.54), [])
-
-  const photos = useTexture(PHOTO_PATHS)
-  const videos = useVideoTextures(VIDEO_PATHS)
-  const mockups = useMemo(
-    () => ({
-      web: createMockupTexture('web', theme),
-      mobile: createMockupTexture('mobile', theme),
-      code: createMockupTexture('code', theme),
-      dashboard: createMockupTexture('dashboard', theme),
-    }),
-    [theme]
-  )
-
-  const textures = useMemo(() => {
-    const photoBySrc = Object.fromEntries(PHOTO_PATHS.map((src, i) => [src, photos[i]]))
-    const videoBySrc = Object.fromEntries(VIDEO_PATHS.map((src, i) => [src, videos[i]]))
-    return BLOCKS.map((b) => {
-      if (b.visual.type === 'video') {
-        return videoBySrc[b.visual.src]
-      }
-      if (b.visual.type === 'photo') {
-        const tex = photoBySrc[b.visual.src]
-        tex.colorSpace = THREE.SRGBColorSpace
-        tex.needsUpdate = true
-        return tex
-      }
-      return mockups[b.visual.kind]
-    })
-  }, [photos, videos, mockups])
+  const videos = useVideoTextures(VIDEO_PATHS, VIDEO_OFFSETS)
 
   return (
     <group>
@@ -88,10 +58,10 @@ export default function BlockCluster({ blocksRef, theme = 'dark' }) {
           }}
         >
           <meshStandardMaterial
-            map={textures[i]}
-            roughness={BLOCKS[i].visual.type === 'video' ? 0.55 : 0.38}
+            map={videos[i]}
+            roughness={0.55}
             metalness={0.06}
-            envMapIntensity={BLOCKS[i].visual.type === 'video' ? 0.6 : 1.1}
+            envMapIntensity={0.6}
           />
         </mesh>
       ))}

@@ -12,7 +12,7 @@ import {
   whatsappHref,
 } from '../config/contacts'
 
-const SERVICE_OPTIONS = ['Développement logiciel', 'Création de site web', 'Installation & config', 'Conseil IT', 'Autre']
+const SERVICE_OPTIONS = ['Développement logiciel', 'Création de site web', 'Installation & config', 'Conseil IT', 'Marketing digital', 'Autre']
 
 const FIELD = 'w-full border border-[#E5E5E5] dark:border-[#2A2A2A] bg-white dark:bg-[#0A0A0A] rounded-lg px-4 py-3 text-sm text-[#0A0A0A] dark:text-[#F5F5F5] outline-none transition-all duration-200 focus:border-[#38BDF8] focus:shadow-[0_0_0_3px_rgba(56,189,248,0.15)]'
 

@@ -3,14 +3,14 @@ import * as THREE from 'three'
 
 /**
  * Crée des THREE.VideoTexture à partir de chemins publics.
- * Vidéos muettes + loop + playsInline pour respecter l’autoplay navigateur.
- * Dispose proprement à l’unmount.
+ * Vidéos muettes + loop + playsInline pour l’autoplay.
+ * `startOffsets` (secondes) décale le début pour désynchroniser les reprises du même fichier.
  */
-export function useVideoTextures(srcs) {
-  const key = srcs.join('|')
+export function useVideoTextures(srcs, startOffsets = []) {
+  const key = srcs.join('|') + '::' + startOffsets.join(',')
 
   const entries = useMemo(() => {
-    return srcs.map((src) => {
+    return srcs.map((src, i) => {
       const video = document.createElement('video')
       video.src = src
       video.crossOrigin = 'anonymous'
@@ -27,18 +27,25 @@ export function useVideoTextures(srcs) {
       texture.magFilter = THREE.LinearFilter
       texture.generateMipmaps = false
 
-      return { video, texture }
+      return { video, texture, offset: startOffsets[i] || 0 }
     })
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- key dérivé de srcs
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [key])
 
   useEffect(() => {
-    entries.forEach(({ video }) => {
+    entries.forEach(({ video, offset }) => {
       const play = () => {
+        try {
+          if (offset > 0 && Number.isFinite(video.duration) && video.duration > 0) {
+            video.currentTime = offset % video.duration
+          }
+        } catch {
+          /* ignore seek errors */
+        }
         video.play().catch(() => {})
       }
-      if (video.readyState >= 2) play()
-      else video.addEventListener('canplay', play, { once: true })
+      if (video.readyState >= 1) play()
+      else video.addEventListener('loadedmetadata', play, { once: true })
     })
 
     return () => {

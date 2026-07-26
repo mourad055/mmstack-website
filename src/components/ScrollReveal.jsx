@@ -27,7 +27,10 @@ export default function ScrollReveal({
   const Mot = motion[as] || motion.div
   const offset = DIRECTIONS[direction] || DIRECTIONS.up
 
-  if (reduce) return <div className={className}>{children}</div>
+  if (reduce) {
+    const Tag = as === 'li' ? 'li' : 'div'
+    return <Tag className={className}>{children}</Tag>
+  }
 
   return (
     <Mot

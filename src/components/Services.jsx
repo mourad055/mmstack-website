@@ -1,4 +1,4 @@
-import { Code2, Globe, HardDrive, Lightbulb, ArrowRight } from 'lucide-react'
+import { Code2, Globe, HardDrive, Lightbulb, Megaphone, ArrowRight } from 'lucide-react'
 import { motion, useReducedMotion } from 'framer-motion'
 import { SpotlightCard } from '../utils/premium'
 import ScrollReveal from './ScrollReveal'
@@ -72,6 +72,12 @@ const services = [
     desc: 'Audit de vos besoins numériques et accompagnement dans votre transformation digitale — une stratégie claire, des priorités concrètes.',
     Pattern: Hexagons, patternId: 'svc-hex', badge: 'Audit · Stratégie', badgeColor: '#34D399',
     photo: '/conseil-it.jpg',
+  },
+  {
+    icon: Megaphone, title: 'Marketing digital',
+    contactService: 'Marketing digital',
+    desc: 'Pour les entreprises qui veulent être visibles en ligne : stratégie marketing, création de contenus publicitaires (visuels, textes, pubs réseaux sociaux) et campagnes pour attirer et convertir vos clients.',
+    Pattern: Hexagons, patternId: 'svc-mkt', badge: 'Contenu · Campagnes', badgeColor: '#F59E0B',
   },
 ]
 
