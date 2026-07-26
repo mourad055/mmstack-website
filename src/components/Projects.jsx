@@ -8,18 +8,18 @@ const websites = [
     desc: "Site immersif pour une officine de haute couture cellulaire — diagnostic de peau interactif et personnalisation de sérums botaniques.",
     result: 'En ligne',
     stack: ['React', 'Motion', 'UX'],
-    accent: '#34D399',
-    visual: 'sites-web.jpg',
+    accent: '#B76E79',
+    visual: 'cover-aura-labs.png',
     href: 'https://beauty.services-ztf.com',
   },
   {
-    title: 'Pharmacie des Trois Frontières',
+    title: 'Pharmacie Nova',
     category: 'Site vitrine',
-    desc: 'Site web moderne pour une pharmacie à Ambam — contact rapide, horaires et présence locale claire pour les patients.',
+    desc: 'Site web moderne pour une pharmacie locale — contact rapide, horaires et présence digitale claire pour les patients.',
     result: 'En ligne',
     stack: ['React', 'SEO', 'Responsive'],
-    accent: '#38BDF8',
-    visual: 'conseil-it.jpg',
+    accent: '#0F766E',
+    visual: 'cover-pharmacie-nova.png',
     href: 'https://pharmacy.services-ztf.com',
   },
 ]
@@ -51,26 +51,22 @@ const apps = [
 
 function WebsiteVisual({ project }) {
   return (
-    <div className="relative h-52 md:h-60 overflow-hidden">
+    <div className="relative h-52 md:h-60 overflow-hidden bg-white">
       <img
         src={`/${project.visual}`}
         alt={project.title}
         loading="lazy"
-        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/85 via-[#0A0A0A]/20 to-transparent" />
       <span
-        className="absolute top-4 left-4 text-[10px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full backdrop-blur-sm"
-        style={{ color: project.accent, backgroundColor: `${project.accent}26`, border: `1px solid ${project.accent}44` }}
+        className="absolute top-4 left-4 text-[10px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full bg-white/90 backdrop-blur-sm shadow-sm"
+        style={{ color: project.accent, border: `1px solid ${project.accent}55` }}
       >
         {project.category}
       </span>
-      <span className="absolute top-4 right-4 text-[10px] font-mono text-white/90 bg-black/40 border border-white/15 px-2 py-1 rounded-full backdrop-blur-sm">
+      <span className="absolute top-4 right-4 text-[10px] font-mono text-[#6B6B6B] bg-white/90 border border-[#E5E5E5] px-2 py-1 rounded-full backdrop-blur-sm shadow-sm">
         {project.result}
       </span>
-      <div className="absolute bottom-4 left-4 right-4">
-        <h3 className="font-bold text-white text-xl md:text-2xl leading-tight">{project.title}</h3>
-      </div>
     </div>
   )
 }
@@ -146,6 +142,7 @@ export default function Projects() {
                 <WebsiteVisual project={p} />
 
                 <div className="flex flex-col flex-1 p-6 md:p-7">
+                  <h3 className="font-bold text-[#0A0A0A] dark:text-white text-xl mb-2">{p.title}</h3>
                   <p className="text-[#6B6B6B] dark:text-[#A0A0A0] text-sm leading-relaxed flex-1">{p.desc}</p>
 
                   <div className="flex flex-wrap gap-2 mt-4 mb-6">
