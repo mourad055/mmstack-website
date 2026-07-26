@@ -78,6 +78,7 @@ const services = [
     contactService: 'Marketing digital',
     desc: 'Pour les entreprises qui veulent être visibles en ligne : stratégie marketing, création de contenus publicitaires (visuels, textes, pubs réseaux sociaux) et campagnes pour attirer et convertir vos clients.',
     Pattern: Hexagons, patternId: 'svc-mkt', badge: 'Contenu · Campagnes', badgeColor: '#F59E0B',
+    photo: '/marketing-digital.jpg',
   },
 ]
 
