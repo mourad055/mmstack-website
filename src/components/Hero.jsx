@@ -64,7 +64,7 @@ export default function Hero({ introDone = true }) {
           {/* Badge */}
           <motion.div variants={rise} custom={0} initial="hidden" animate={anim}
             className="mb-8 inline-flex self-start items-center rounded-full border border-[#0284C7]/25 dark:border-white/20 md:border-white/20 bg-white/60 dark:bg-white/5 md:bg-white/5 px-4 py-1.5 text-xs text-[#0A0A0A]/75 dark:text-white/80 md:text-white/80 tracking-wide backdrop-blur-sm">
-            🇨🇲 Ambam, Cameroun · Depuis 2025
+            🇨🇲 Ambam, Sud Cameroun
           </motion.div>
 
           {/* Titre — mot par mot */}
